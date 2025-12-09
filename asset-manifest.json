@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/soboai/static/css/main.7bdc245b.css",
-    "main.js": "/soboai/static/js/main.a198a5cb.js",
+    "main.js": "/soboai/static/js/main.5524dc4c.js",
     "static/js/453.d2878248.chunk.js": "/soboai/static/js/453.d2878248.chunk.js",
     "index.html": "/soboai/index.html",
     "main.7bdc245b.css.map": "/soboai/static/css/main.7bdc245b.css.map",
-    "main.a198a5cb.js.map": "/soboai/static/js/main.a198a5cb.js.map",
+    "main.5524dc4c.js.map": "/soboai/static/js/main.5524dc4c.js.map",
     "453.d2878248.chunk.js.map": "/soboai/static/js/453.d2878248.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7bdc245b.css",
-    "static/js/main.a198a5cb.js"
+    "static/js/main.5524dc4c.js"
   ]
 }
