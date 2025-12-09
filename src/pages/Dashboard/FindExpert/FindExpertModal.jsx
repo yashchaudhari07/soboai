@@ -21,29 +21,34 @@ export default function FindExpertModal({ open, onClose, onNext }) {
   ];
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    // Added 'p-4' to ensure modal doesn't touch screen edges on mobile
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
 
-      <div className="bg-white rounded-xl w-[900px] max-h-[90vh] overflow-y-auto shadow-xl p-8 relative">
+      {/* CHANGED: w-[900px] -> w-full max-w-[900px] (Makes it fluid but caps at 900px) */}
+      {/* CHANGED: p-8 -> p-5 md:p-8 (Less padding on mobile) */}
+      <div className="bg-white rounded-xl w-full max-w-[900px] max-h-[90vh] overflow-y-auto shadow-xl p-5 md:p-8 relative">
 
         {/* Close button */}
         <button
-          className="absolute right-6 top-6 text-gray-500 text-xl"
+          className="absolute right-4 top-4 md:right-6 md:top-6 text-gray-500 text-xl"
           onClick={onClose}
         >
           ✕
         </button>
 
         {/* TITLE */}
-        <h2 className="text-[22px] font-semibold mb-6">Find an expert</h2>
+        <h2 className="text-[20px] md:text-[22px] font-semibold mb-6">Find an expert</h2>
 
         <p className="text-sm text-gray-500 mb-1">Step 1 of 2</p>
-        <h3 className="text-[22px] font-semibold mb-2">Choose your business area</h3>
-        <p className="text-gray-500 mb-6">
+        <h3 className="text-[18px] md:text-[22px] font-semibold mb-2">Choose your business area</h3>
+        <p className="text-gray-500 mb-6 text-sm md:text-base">
           Select the area where you need expert insights.
         </p>
 
         {/* GRID */}
-        <div className="grid grid-cols-3 gap-4">
+        {/* CHANGED: grid-cols-3 -> grid-cols-1 sm:grid-cols-2 md:grid-cols-3 */}
+        {/* This creates 1 column on mobile, 2 on tablets, 3 on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {areas.map((a) => (
             <div
               key={a.id}
@@ -65,13 +70,14 @@ export default function FindExpertModal({ open, onClose, onNext }) {
         </div>
 
         {/* FOOTER */}
-        <div className="flex justify-between items-center mt-6">
+        {/* CHANGED: Added flex-col-reverse for mobile so button stays easily clickable */}
+        <div className="flex flex-col-reverse sm:flex-row justify-between items-center mt-6 gap-4 sm:gap-0">
           <p className="text-gray-400 text-[13px]">
             Select an area to continue
           </p>
 
           <button
-            className={`px-6 py-2 rounded-lg text-white text-[14px] transition
+            className={`w-full sm:w-auto px-6 py-2 rounded-lg text-white text-[14px] transition
               ${selected ? "bg-[#2D60FF]" : "bg-gray-300 cursor-not-allowed"}`}
             disabled={!selected}
             onClick={() => onNext(selected)}

@@ -1,9 +1,22 @@
 export default function ExpertsBanner({ onFind }) {
   return (
-    <div className="relative bg-[#2D60FF] h-[150px] rounded-xl px-6 flex items-center justify-center overflow-hidden">
+    <div
+      className="
+        relative 
+        bg-[#2D60FF] 
+        h-[180px] sm:h-[150px] 
+        rounded-xl 
+        px-4 sm:px-6 
+        flex items-center justify-center 
+        overflow-hidden
+      "
+    >
 
       {/* LEFT CIRCLES */}
-      <div className="circle-wrapper" style={{ left: "20px", top: "0px" }}>
+      <div
+        className="circle-wrapper hidden sm:block"
+        style={{ left: "20px", top: "0px" }}
+      >
         <div className="circle-ring" style={{ width: "160px", height: "160px" }}></div>
         <div className="circle-ring" style={{ width: "130px", height: "130px", top: "15px", left: "15px" }}></div>
         <div className="circle-ring" style={{ width: "100px", height: "100px", top: "30px", left: "30px" }}></div>
@@ -12,7 +25,10 @@ export default function ExpertsBanner({ onFind }) {
       </div>
 
       {/* RIGHT CIRCLES */}
-      <div className="circle-wrapper" style={{ right: "20px", bottom: "-10px" }}>
+      <div
+        className="circle-wrapper hidden sm:block"
+        style={{ right: "20px", bottom: "-10px" }}
+      >
         <div className="circle-ring" style={{ width: "160px", height: "160px" }}></div>
         <div className="circle-ring" style={{ width: "130px", height: "130px", top: "15px", left: "15px" }}></div>
         <div className="circle-ring" style={{ width: "100px", height: "100px", top: "30px", left: "30px" }}></div>
@@ -21,17 +37,28 @@ export default function ExpertsBanner({ onFind }) {
       </div>
 
       {/* TEXT + BUTTON */}
-      <div className="text-center relative z-[5]">
-        <p className="text-white text-[14px] leading-[20px]">
-          Share your challenges with us, and our experts will work closely with you to provide tailored solutions <br />
-          that meet your needs.
+      <div className="text-center relative z-[5] max-w-[90%] sm:max-w-full">
+        <p className="text-white text-[13px] sm:text-[14px] leading-[18px] sm:leading-[20px]">
+          Share your challenges with us, and our experts will work closely with you
+          <br className="hidden sm:block" />
+          to provide tailored solutions that meet your needs.
         </p>
 
         <button
           onClick={onFind}
-          className="mt-4 bg-white text-[#2D60FF] px-6 py-2 rounded-full flex items-center gap-2 mx-auto shadow-sm"
+          className="
+            mt-4 
+            bg-white text-[#2D60FF] 
+            px-5 sm:px-6 
+            py-2 
+            rounded-full 
+            flex items-center gap-2 
+            mx-auto 
+            shadow-sm 
+            text-[13px] sm:text-[14px]
+          "
         >
-          <span className="text-[14px]">Find an expert</span>
+          Find an expert
         </button>
       </div>
     </div>

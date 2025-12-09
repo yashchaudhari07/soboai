@@ -13,25 +13,29 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
   const s4 = formData.step4;
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-6 py-12 bg-white">
+    // CHANGED: px-6 py-12 -> px-4 py-8 md:px-6 md:py-12 (Less padding on mobile)
+    <div className="min-h-screen flex flex-col items-center px-4 py-8 md:px-6 md:py-12 bg-white">
 
       <div className="w-full max-w-3xl">
 
         {/* TITLE */}
-        <h1 className="text-[26px] font-semibold text-gray-900">
+        {/* CHANGED: text-[26px] -> text-[22px] md:text-[26px] */}
+        <h1 className="text-[22px] md:text-[26px] font-semibold text-gray-900">
           Almost done - review your details
         </h1>
 
-        <p className="text-gray-500 mt-1">
+        <p className="text-gray-500 mt-1 text-sm md:text-base">
           Please review your information and confirm to complete your profile
         </p>
 
-        <div className="h-10"></div>
+        <div className="h-6 md:h-10"></div>
 
 
         {/* ===================== YOUR DETAILS ===================== */}
         <ReviewCard title="Your details." onEdit={() => goToStep(1)}>
-          <div className="grid grid-cols-2 gap-y-4 text-sm">
+          {/* CHANGED: grid-cols-2 -> grid-cols-1 sm:grid-cols-2 */}
+          {/* Mobile: 1 column, Desktop: 2 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 text-sm">
 
             <div>
               <div className="text-gray-500">First name</div>
@@ -45,7 +49,7 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
 
             <div>
               <div className="text-gray-500">Email</div>
-              <div className="font-medium text-gray-900">{s1.email}</div>
+              <div className="font-medium text-gray-900 break-all">{s1.email}</div>
             </div>
 
             <div>
@@ -62,12 +66,13 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
         </ReviewCard>
 
 
-        <div className="h-8"></div>
+        <div className="h-6 md:h-8"></div>
 
 
         {/* ===================== BUSINESS DETAILS ===================== */}
         <ReviewCard title="Business details." onEdit={() => goToStep(2)}>
-          <div className="grid grid-cols-2 gap-y-4 text-sm">
+          {/* CHANGED: grid-cols-2 -> grid-cols-1 sm:grid-cols-2 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 text-sm">
 
             <div>
               <div className="text-gray-500">Business name</div>
@@ -91,21 +96,23 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
               </div>
             </div>
 
-            <div className="col-span-2">
+            {/* CHANGED: col-span-2 -> col-span-1 sm:col-span-2 */}
+            <div className="col-span-1 sm:col-span-2">
               <div className="text-gray-500">Business website</div>
-              <div className="font-medium text-gray-900">{s2.website}</div>
+              <div className="font-medium text-gray-900 break-all">{s2.website}</div>
             </div>
 
           </div>
         </ReviewCard>
 
 
-        <div className="h-8"></div>
+        <div className="h-6 md:h-8"></div>
 
 
         {/* ===================== COMPANY PROFILE ===================== */}
         <ReviewCard title="Company profile" onEdit={() => goToStep(3)}>
-          <div className="grid grid-cols-2 gap-y-4 text-sm">
+          {/* CHANGED: grid-cols-2 -> grid-cols-1 sm:grid-cols-2 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 text-sm">
 
             <div>
               <div className="text-gray-500">Annual revenue (USD)</div>
@@ -121,12 +128,13 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
         </ReviewCard>
 
 
-        <div className="h-8"></div>
+        <div className="h-6 md:h-8"></div>
 
 
         {/* ===================== INTERESTS ===================== */}
         <ReviewCard title="Interests & preferences" onEdit={() => goToStep(4)}>
-          <div className="grid grid-cols-2 gap-y-4 text-sm">
+          {/* CHANGED: grid-cols-2 -> grid-cols-1 sm:grid-cols-2 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 text-sm">
 
             <div>
               <div className="text-gray-500">Preferred insight category</div>
@@ -144,7 +152,7 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
         </ReviewCard>
 
 
-        <div className="h-10"></div>
+        <div className="h-8 md:h-10"></div>
 
 
         {/* ===================== CONSENT ===================== */}
@@ -157,7 +165,7 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
               type="checkbox"
               checked={agree1}
               onChange={(e) => setAgree1(e.target.checked)}
-              className="mt-1 w-4 h-4"
+              className="mt-1 w-4 h-4 flex-shrink-0"
             />
             <span>I confirm that all information provided is accurate</span>
           </label>
@@ -167,7 +175,7 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
               type="checkbox"
               checked={agree2}
               onChange={(e) => setAgree2(e.target.checked)}
-              className="mt-1 w-4 h-4"
+              className="mt-1 w-4 h-4 flex-shrink-0"
             />
             <span>
               I agree to <a className="text-blue-600 underline">Sobo’s Terms of service</a> and{" "}
@@ -178,8 +186,10 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
         </div>
 
         {/* ===================== BUTTONS ===================== */}
-        <div className="flex justify-between mt-12">
-          <button className="px-6 py-3 bg-[#F3F5FF] text-[#3C4DE8] rounded-lg font-medium"
+        {/* CHANGED: Added flex-col-reverse and gap-4 to stack buttons on mobile */}
+        <div className="flex flex-col-reverse sm:flex-row justify-between mt-8 md:mt-12 gap-4 sm:gap-0">
+          <button 
+            className="w-full sm:w-auto px-6 py-3 bg-[#F3F5FF] text-[#3C4DE8] rounded-lg font-medium transition hover:bg-[#e0e4ff]"
             onClick={() => goToStep(4)}
           >
             Back
@@ -188,8 +198,8 @@ export default function ReviewPage({ formData, goToStep, finalSubmit }) {
           <button
             disabled={!canSubmit}
             onClick={finalSubmit}
-            className={`px-8 py-3 rounded-lg font-medium text-white transition
-              ${canSubmit ? "bg-[#3C64F4]" : "bg-gray-300 cursor-not-allowed"}`}
+            className={`w-full sm:w-auto px-8 py-3 rounded-lg font-medium text-white transition
+              ${canSubmit ? "bg-[#3C64F4] hover:bg-[#3252d1]" : "bg-gray-300 cursor-not-allowed"}`}
           >
             Submit profile
           </button>

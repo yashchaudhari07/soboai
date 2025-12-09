@@ -31,30 +31,38 @@ const defaultHistory = [
   },
 ];
 
-
 export default function Experts() {
   const [finderOpen, setFinderOpen] = useState(false);
   const [history, setHistory] = useState(defaultHistory);
   const [activeTab, setActiveTab] = useState("All");
 
-  const filtered = 
+  const filtered =
     activeTab === "All"
       ? history
       : history.filter((item) => item.status === activeTab);
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6 w-full">
 
-      <h1 className="text-[22px] font-semibold mb-4">Experts</h1>
+      {/* PAGE TITLE */}
+      <h1 className="text-[20px] sm:text-[22px] font-semibold mb-4">
+        Experts
+      </h1>
 
+      {/* BLUE BANNER */}
       <ExpertsBanner onFind={() => setFinderOpen(true)} />
 
       {/* FILTERS */}
-      <div className="mt-6 flex justify-end gap-2">
+      <div className="
+        mt-6 
+        flex flex-wrap sm:flex-nowrap 
+        justify-end 
+        gap-2
+      ">
         {TABS.map((tab) => (
           <button
             key={tab}
-            className={`px-5 py-2 rounded-lg text-sm border
+            className={`px-4 sm:px-5 py-2 rounded-lg text-sm border
               ${
                 activeTab === tab
                   ? "bg-[#2D60FF] text-white border-[#2D60FF]"
@@ -68,13 +76,23 @@ export default function Experts() {
         ))}
       </div>
 
-      <h2 className="text-[18px] font-semibold mt-6">Expert match history</h2>
+      {/* SECTION TITLE */}
+      <h2 className="text-[16px] sm:text-[18px] font-semibold mt-6">
+        Expert match history
+      </h2>
 
-      {/* GRID */}
-      <div className="grid grid-cols-3 gap-4 mt-4">
+      {/* GRID RESPONSIVE */}
+      <div className="
+        grid 
+        grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+        gap-4 
+        mt-4
+      ">
         {filtered.map((item, index) => (
-          <div key={index} className="border rounded-xl bg-white p-4 relative">
-
+          <div
+            key={index}
+            className="border rounded-xl bg-white p-4 relative"
+          >
             {/* STATUS BADGE */}
             <span
               className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium"
@@ -96,7 +114,7 @@ export default function Experts() {
               {item.status}
             </span>
 
-            {/* ICON PLACEHOLDER */}
+            {/* ICON */}
             <div className="w-[45px] h-[45px] bg-[#EEF2FF] rounded-lg mb-3" />
 
             {/* TITLE */}
@@ -112,6 +130,7 @@ export default function Experts() {
 
             <div className="border-b my-3"></div>
 
+            {/* STATUS TEXT */}
             <p className="text-[13px] text-gray-700 leading-[18px]">
               <b>Status –</b> {item.statusText}
             </p>
@@ -120,7 +139,7 @@ export default function Experts() {
         ))}
       </div>
 
-      {/* FIND EXPERT MODAL FLOW */}
+      {/* FIND EXPERT POPUP FLOW */}
       <FindExpertFlow
         open={finderOpen}
         onClose={() => setFinderOpen(false)}

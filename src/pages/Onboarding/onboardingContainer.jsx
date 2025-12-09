@@ -12,8 +12,13 @@ export default function OnboardingContainer({ close }) {
   const back = () => setStep((s) => Math.max(1, s - 1));
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-white w-full max-w-4xl rounded-xl p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
+    // Added 'p-4' so the modal doesn't touch the screen edges on mobile
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+      
+      {/* CHANGED: p-8 -> p-5 md:p-8 */}
+      {/* Reduced padding on mobile (p-5) so the content gets more space */}
+      <div className="bg-white w-full max-w-4xl rounded-xl p-5 md:p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
+        
         <ProgressBar step={step} />
 
         <div className="mt-4">
@@ -23,9 +28,10 @@ export default function OnboardingContainer({ close }) {
           {step === 4 && <Step4 />}
         </div>
 
-        <div className="flex justify-between mt-8 items-center">
+        {/* Footer Buttons */}
+        <div className="flex justify-between mt-6 md:mt-8 items-center">
           <button
-            className="px-5 py-3 bg-gray-100 rounded-lg text-gray-700"
+            className="px-5 py-3 bg-gray-100 rounded-lg text-gray-700 text-sm md:text-base transition hover:bg-gray-200"
             onClick={step === 1 ? close : back}
           >
             {step === 1 ? "Close" : "Back"}
@@ -35,14 +41,14 @@ export default function OnboardingContainer({ close }) {
             {step < 4 ? (
               <button
                 onClick={next}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg text-sm md:text-base transition hover:bg-blue-700"
               >
                 Next
               </button>
             ) : (
               <button
                 onClick={close}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg text-sm md:text-base transition hover:bg-blue-700"
               >
                 Finish
               </button>

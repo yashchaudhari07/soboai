@@ -28,19 +28,22 @@ export default function Step2({ formData, setFormData }) {
     <div className="w-full">
 
       {/* TITLE */}
-      <h1 className="text-[26px] font-semibold text-gray-900">
+      {/* CHANGED: text-[26px] -> text-[22px] md:text-[26px] */}
+      <h1 className="text-[22px] md:text-[26px] font-semibold text-gray-900">
         Tell us more about your business
       </h1>
 
-      <p className="text-gray-500 mt-1">
+      {/* CHANGED: text-base (default) -> text-sm md:text-base */}
+      <p className="text-gray-500 mt-1 text-sm md:text-base">
         Providing accurate details helps us tailor insight and match you with the most relevant experts.
       </p>
 
       {/* LOGO UPLOAD BLOCK */}
-      <div className="flex items-center gap-4 mt-10">
+      {/* CHANGED: mt-10 -> mt-6 md:mt-10 (Less margin on mobile) */}
+      <div className="flex items-center gap-4 mt-6 md:mt-10">
 
         {/* CIRCLE THUMBNAIL EXACT FIGMA */}
-        <div className="w-16 h-16 rounded-full bg-gray-100 border flex items-center justify-center overflow-hidden">
+        <div className="w-16 h-16 rounded-full bg-gray-100 border flex items-center justify-center overflow-hidden flex-shrink-0">
 
           {logoPreview ? (
             <img src={logoPreview} alt="logo" className="w-full h-full object-cover" />
@@ -69,16 +72,18 @@ export default function Step2({ formData, setFormData }) {
       </div>
 
       {/* FORM GRID EXACT LIKE FIGMA */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+      {/* CHANGED: gap-6 -> gap-4 md:gap-6 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-8">
 
         {/* BUSINESS NAME */}
         <div className="flex flex-col gap-2">
           <label className="text-sm font-medium text-gray-700">Business name *</label>
+          {/* ADDED: w-full to ensure input stretches */}
           <input
             placeholder="Sobo, Inc"
             value={s.name}
             onChange={(e) => update("name", e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none"
+            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none w-full"
           />
         </div>
 
@@ -88,7 +93,7 @@ export default function Step2({ formData, setFormData }) {
           <select
             value={s.industry}
             onChange={(e) => update("industry", e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-3 text-gray-600 focus:outline-none"
+            className="border border-gray-300 rounded-lg px-4 py-3 text-gray-600 focus:outline-none w-full bg-white"
           >
             <option value="">Select option ...</option>
             <option>Technology</option>
@@ -105,7 +110,7 @@ export default function Step2({ formData, setFormData }) {
             placeholder="San Francisco"
             value={s.city}
             onChange={(e) => update("city", e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none"
+            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none w-full"
           />
         </div>
 
@@ -116,18 +121,19 @@ export default function Step2({ formData, setFormData }) {
             placeholder="California"
             value={s.state}
             onChange={(e) => update("state", e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none"
+            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none w-full"
           />
         </div>
 
         {/* WEBSITE */}
+        {/* md:col-span-2 ensures full width on desktop, auto on mobile */}
         <div className="flex flex-col gap-2 md:col-span-2">
           <label className="text-sm font-medium text-gray-700">Business website</label>
           <input
             placeholder="https://www.yourcompany.com"
             value={s.website}
             onChange={(e) => update("website", e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none"
+            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none w-full"
           />
         </div>
 
@@ -138,7 +144,7 @@ export default function Step2({ formData, setFormData }) {
             placeholder="Briefly describe what your business does (Optional)"
             value={s.desc}
             onChange={(e) => update("desc", e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-3 h-32 resize-none focus:outline-none"
+            className="border border-gray-300 rounded-lg px-4 py-3 h-32 resize-none focus:outline-none w-full"
           />
         </div>
       </div>

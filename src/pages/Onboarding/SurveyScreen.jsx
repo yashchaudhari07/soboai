@@ -23,7 +23,7 @@ export default function SurveyScreen() {
     step4: { interest: "" },
   });
 
-  // VALIDATION
+  // VALIDATION (No changes here)
   const isStepValid = () => {
     switch (step) {
       case 1: {
@@ -34,7 +34,7 @@ export default function SurveyScreen() {
           s.lastName &&
           s.role &&
           s.email &&
-          phoneDigits >= 10   // ✔ minimum 10 digits required
+          phoneDigits >= 10 
         );
       }
 
@@ -48,9 +48,9 @@ export default function SurveyScreen() {
         return (
           s.revenue &&
           s.employees &&
-          !isNaN(Number(s.revenue)) &&      // ✔ numbers only
+          !isNaN(Number(s.revenue)) && 
           !isNaN(Number(s.employees)) &&
-          Number(s.employees) > 0           // ✔ positive number
+          Number(s.employees) > 0 
         );
       }
 
@@ -97,24 +97,28 @@ export default function SurveyScreen() {
 
 
   return (
-    <div className="min-h-screen px-6 py-12 flex flex-col items-center">
+    <div className="min-h-screen px-4 py-8 md:px-6 md:py-12 flex flex-col items-center">
+      {/* CHANGED: px-6 py-12 -> px-4 py-8 md:px-6 md:py-12 (Less padding on mobile) */}
       <div className="w-full max-w-4xl">
         <ProgressBar step={step} />
       </div>
 
-      <div className="w-full max-w-4xl mt-10 mb-16">
+      <div className="w-full max-w-4xl mt-6 mb-10 md:mt-10 md:mb-16">
+        {/* CHANGED: mt-10 mb-16 -> mt-6 mb-10 md:mt-10 md:mb-16 (Less vertical space on mobile) */}
         {step === 1 && <Step1 formData={formData} setFormData={setFormData} />}
         {step === 2 && <Step2 formData={formData} setFormData={setFormData} />}
         {step === 3 && <Step3 formData={formData} setFormData={setFormData} />}
         {step === 4 && <Step4 formData={formData} setFormData={setFormData} />}
       </div>
 
-      <div className="w-full max-w-4xl flex justify-between">
-
+      <div className="w-full max-w-4xl flex flex-col-reverse sm:flex-row justify-between gap-4">
+        {/* CHANGED: Added flex-col-reverse and gap-4 to stack buttons on mobile */}
+        
         <button
           onClick={back}
           disabled={step === 1}
-          className="px-6 py-3 bg-[#F3F5FF] text-[#3C4DE8] rounded-lg disabled:opacity-40"
+          /* ADDED: w-full on mobile for easy tap */
+          className="w-full sm:w-auto px-6 py-3 bg-[#F3F5FF] text-[#3C4DE8] rounded-lg disabled:opacity-40 transition hover:bg-[#e0e4ff]"
         >
           Back
         </button>
@@ -122,8 +126,9 @@ export default function SurveyScreen() {
         <button
           onClick={next}
           disabled={!isStepValid()}
-          className={`px-8 py-3 rounded-lg text-white transition ${
-            isStepValid() ? "bg-[#3C64F4]" : "bg-gray-300 cursor-not-allowed"
+          /* ADDED: w-full on mobile for easy tap */
+          className={`w-full sm:w-auto px-8 py-3 rounded-lg text-white transition ${
+            isStepValid() ? "bg-[#3C64F4] hover:bg-[#3252d1]" : "bg-gray-300 cursor-not-allowed"
           }`}
         >
           {step === 4 ? "Review" : "Next"}

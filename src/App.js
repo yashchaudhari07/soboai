@@ -1,8 +1,8 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import DashboardLayout from "./layouts/DashboardLayout";
 import Home from "./pages/Dashboard/Home";
+import DashboardLayout from "./layouts/DashboardLayout";
 
-export default function App() {
+function App() {
   return (
     <Router>
       <Routes>
@@ -12,3 +12,5 @@ export default function App() {
     </Router>
   );
 }
+
+export default App;
