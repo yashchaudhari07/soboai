@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/soboai-project/static/css/main.7bdc245b.css",
-    "main.js": "/soboai-project/static/js/main.88a36c1f.js",
-    "static/js/453.d2878248.chunk.js": "/soboai-project/static/js/453.d2878248.chunk.js",
-    "index.html": "/soboai-project/index.html",
-    "main.7bdc245b.css.map": "/soboai-project/static/css/main.7bdc245b.css.map",
-    "main.88a36c1f.js.map": "/soboai-project/static/js/main.88a36c1f.js.map",
-    "453.d2878248.chunk.js.map": "/soboai-project/static/js/453.d2878248.chunk.js.map"
+    "main.css": "/soboai/static/css/main.7bdc245b.css",
+    "main.js": "/soboai/static/js/main.a198a5cb.js",
+    "static/js/453.d2878248.chunk.js": "/soboai/static/js/453.d2878248.chunk.js",
+    "index.html": "/soboai/index.html",
+    "main.7bdc245b.css.map": "/soboai/static/css/main.7bdc245b.css.map",
+    "main.a198a5cb.js.map": "/soboai/static/js/main.a198a5cb.js.map",
+    "453.d2878248.chunk.js.map": "/soboai/static/js/453.d2878248.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7bdc245b.css",
-    "static/js/main.88a36c1f.js"
+    "static/js/main.a198a5cb.js"
   ]
 }
