@@ -1,0 +1,8 @@
+export default function AIInsights() {
+  return (
+    <div className="p-6">
+      <h1 className="text-3xl font-bold text-gray-900">AI Insights</h1>
+      <p className="text-gray-600 mt-2">Get data-driven insights powered by AI.</p>
+    </div>
+  );
+}
