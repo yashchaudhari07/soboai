@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function ReviewCard({ title, children, onEdit }) {
   return (
     <div className="
@@ -7,15 +9,18 @@ export default function ReviewCard({ title, children, onEdit }) {
       p-4 sm:p-6 
       relative 
       bg-white
+      font-['IBM_Plex_Sans_Hebrew']
+      shadow-sm
     ">
       
-      {/* TITLE + EDIT (Responsive layout) */}
+      {/* TITLE + EDIT HEADER */}
       <div className="
         flex flex-col sm:flex-row 
         justify-between sm:items-center 
-        gap-3 mb-4
+        gap-3 sm:gap-4 mb-4
       ">
-        <h3 className="font-semibold text-gray-900 text-[16px] break-words">
+        {/* Title: Responsive Text Size */}
+        <h3 className="font-semibold text-gray-900 text-[16px] sm:text-[18px] break-words leading-tight">
           {title}
         </h3>
 
@@ -24,14 +29,16 @@ export default function ReviewCard({ title, children, onEdit }) {
           onClick={onEdit}
           className="
             self-start sm:self-auto
-            flex items-center gap-1 
-            px-3 sm:px-4 py-2 
+            flex items-center gap-2 
+            px-4 py-2 
             rounded-lg 
             bg-[#F4F6FF] 
             text-[#3C4DE8] 
             font-medium 
-            text-sm
+            text-[14px]
             whitespace-nowrap
+            hover:bg-[#E8EFFF] transition-colors
+            active:scale-95
           "
         >
           <svg
@@ -54,7 +61,7 @@ export default function ReviewCard({ title, children, onEdit }) {
       </div>
 
       {/* CHILD CONTENT */}
-      <div className="mt-2 sm:mt-0">
+      <div className="mt-2 text-[14px] sm:text-[15px] text-gray-600 leading-relaxed">
         {children}
       </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function SuccessModal({ onOk }) {
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[999] p-4">
+    <div className="fixed font-plex-hebrew inset-0 bg-black/40 flex items-center justify-center z-[999] p-4">
 
       {/* CENTER WHITE MODAL */}
       <div

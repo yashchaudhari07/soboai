@@ -1,34 +1,38 @@
 import React, { useState } from "react";
 import SurveyScreen from "../Onboarding/SurveyScreen";
 
-export default function Home() {
+// CHANGE 1: Accept formData and setFormData as props
+export default function Home({ formData, setFormData }) {
   const [start, setStart] = useState(false);
 
   if (start) {
-    return <SurveyScreen />; // FULLSCREEN, SAME AS BEFORE
+    // CHANGE 2: Pass these props down to the SurveyScreen
+    return <SurveyScreen formData={formData} setFormData={setFormData} />;
   }
 
   return (
     <div
       className="
         flex flex-col items-center 
-        px-4 sm:px-6 md:px-0 
-        min-h-screen 
         justify-center 
+        min-h-screen 
+        bg-white 
+        px-6 py-12 md:px-0
         text-center
+        font-plex-hebrew
       "
     >
 
       {/* LOGO PLACEHOLDER */}
-      <div className="w-12 h-12 rounded-md bg-blue-600 mb-6"></div>
+      <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-[#2D60FF] mb-6 md:mb-8 shadow-lg shadow-blue-200"></div>
 
       {/* HEADING */}
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-        Welcome to <span className="text-blue-600">Sobo</span>
+      <h1 className="text-[28px] sm:text-[34px] md:text-[42px] font-bold leading-tight text-gray-900">
+        Welcome to <span className="text-[#2D60FF]">Sobo</span>
       </h1>
 
       {/* SUBTEXT */}
-      <p className="text-gray-600 mt-2 max-w-sm sm:max-w-md md:max-w-xl text-sm sm:text-base">
+      <p className="text-gray-500 mt-3 md:mt-4 max-w-[300px] sm:max-w-md md:max-w-xl text-[15px] sm:text-[16px] leading-relaxed mx-auto">
         Connect businesses with expert insights for smarter growth
       </p>
 
@@ -36,11 +40,14 @@ export default function Home() {
       <button
         onClick={() => setStart(true)}
         className="
-          mt-6 px-6 sm:px-8 py-3 
+          mt-8 md:mt-10 
+          w-full sm:w-auto
+          px-8 py-3.5 
           rounded-xl 
-          bg-blue-600 text-white 
-          shadow 
-          text-sm sm:text-base
+          bg-[#2D60FF] text-white 
+          font-medium text-[16px]
+          shadow-lg shadow-blue-500/30
+          hover:bg-blue-700 transition-transform active:scale-95
         "
       >
         Start business onboarding
@@ -51,37 +58,44 @@ export default function Home() {
         className="
           grid 
           grid-cols-1 
-          sm:grid-cols-2 
           md:grid-cols-3 
-          gap-8 
-          mt-16 sm:mt-20 
-          w-full max-w-4xl
+          gap-8 md:gap-12
+          mt-16 md:mt-24 
+          w-full max-w-md md:max-w-5xl
+          mx-auto
         "
       >
 
         {/* CARD 1 */}
-        <div className="px-4 sm:px-0">
-          <div className="w-12 h-12 bg-blue-100 rounded-md mx-auto mb-4"></div>
-          <h3 className="font-semibold text-base">Personalized insight</h3>
-          <p className="text-gray-500 text-sm leading-relaxed">
+        <div className="flex flex-col items-center px-4 md:px-0">
+          <div className="w-12 h-12 bg-[#EEF2FF] rounded-xl mx-auto mb-4 flex items-center justify-center">
+             {/* Icon Placeholder */}
+             <div className="w-6 h-6 bg-[#2D60FF] rounded-full opacity-20"></div>
+          </div>
+          <h3 className="font-semibold text-[16px] text-gray-900 mb-2">Personalized insight</h3>
+          <p className="text-gray-500 text-[14px] leading-relaxed">
             Get tailored recommendations based on your business profile
           </p>
         </div>
 
         {/* CARD 2 */}
-        <div className="px-4 sm:px-0">
-          <div className="w-12 h-12 bg-blue-100 rounded-md mx-auto mb-4"></div>
-          <h3 className="font-semibold text-base">Expert Matching</h3>
-          <p className="text-gray-500 text-sm leading-relaxed">
+        <div className="flex flex-col items-center px-4 md:px-0">
+          <div className="w-12 h-12 bg-[#EEF2FF] rounded-xl mx-auto mb-4 flex items-center justify-center">
+             <div className="w-6 h-6 bg-[#2D60FF] rounded-full opacity-20"></div>
+          </div>
+          <h3 className="font-semibold text-[16px] text-gray-900 mb-2">Expert Matching</h3>
+          <p className="text-gray-500 text-[14px] leading-relaxed">
             Connect with industry professionals in your areas of interest
           </p>
         </div>
 
         {/* CARD 3 */}
-        <div className="px-4 sm:px-0">
-          <div className="w-12 h-12 bg-blue-100 rounded-md mx-auto mb-4"></div>
-          <h3 className="font-semibold text-base">Business Growth</h3>
-          <p className="text-gray-500 text-sm leading-relaxed">
+        <div className="flex flex-col items-center px-4 md:px-0">
+          <div className="w-12 h-12 bg-[#EEF2FF] rounded-xl mx-auto mb-4 flex items-center justify-center">
+             <div className="w-6 h-6 bg-[#2D60FF] rounded-full opacity-20"></div>
+          </div>
+          <h3 className="font-semibold text-[16px] text-gray-900 mb-2">Business Growth</h3>
+          <p className="text-gray-500 text-[14px] leading-relaxed">
             Scale smarter with data-driven strategies and expert guidance
           </p>
         </div>

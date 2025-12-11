@@ -1,33 +1,37 @@
 import React from "react";
 
 /**
- * Simple feature card matching Figma look:
- * Responsive improvements:
- * - Full width on mobile
- * - Auto-adjust max-width on tablet/desktop
- * - Icon + title wrap cleanly on small screens
+ * Responsive Feature Card
+ * - Mobile: Compact text and spacing
+ * - Desktop: Larger fonts and comfortable spacing
  */
 
 export default function FeatureCard({ title, desc }) {
   return (
-    <div className="w-full max-w-full sm:max-w-md md:max-w-sm">
-      <div className="flex flex-col items-center px-3 sm:px-4">
-        <div className="w-full flex flex-col items-start gap-3 sm:gap-4">
+    <div className="w-full h-full font-plex-hebrew ">
+      <div className="flex flex-col items-start">
+        
+        {/* Main Content Container */}
+        <div className="w-full flex flex-col items-start gap-3 md:gap-4">
 
-          {/* ICON + TITLE */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          {/* ICON + TITLE ROW */}
+          <div className="flex items-center gap-3 md:gap-4 w-full">
 
-            {/* small rounded square icon */}
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-md bg-blue-50 flex items-center justify-center">
-              {/* tiny icon placeholder */}
-              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-sm bg-blue-200"></div>
+            {/* Icon Box: Responsive W/H */}
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+              {/* Tiny Icon Placeholder */}
+              <div className="w-5 h-5 md:w-6 md:h-6 rounded-sm bg-blue-200"></div>
             </div>
 
-            <h3 className="text-sm sm:text-sm font-semibold break-words">{title}</h3>
+            {/* Title: Scales with screen size */}
+            <h3 className="text-[14px] md:text-[16px] font-semibold text-gray-900 leading-tight break-words">
+              {title}
+            </h3>
           </div>
 
           {/* DESCRIPTION */}
-          <p className="text-xs sm:text-xs text-gray-500 leading-5">
+          {/* Increased readability on larger screens */}
+          <p className="text-[13px] md:text-[14px] text-gray-500 leading-relaxed">
             {desc}
           </p>
 

@@ -1,6 +1,6 @@
 export default function Engagement() {
   return (
-    <div className="p-4 sm:p-6 w-full">
+    <div className="p-4 font-plex-hebrew sm:p-6 w-full">
 
       {/* TITLE */}
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 break-words">

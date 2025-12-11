@@ -1,6 +1,6 @@
 export default function ExpertRequestDetails({ data, onBack }) {
   return (
-    <div className="p-10 w-full">
+    <div className="p-10 w-full font-plex-hebrew">
 
       {/* PAGE TITLE */}
       <div className="flex items-center justify-between">

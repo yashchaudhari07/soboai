@@ -13,7 +13,7 @@ export default function OnboardingContainer({ close }) {
 
   return (
     // Added 'p-4' so the modal doesn't touch the screen edges on mobile
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 font-plex-hebrew">
       
       {/* CHANGED: p-8 -> p-5 md:p-8 */}
       {/* Reduced padding on mobile (p-5) so the content gets more space */}

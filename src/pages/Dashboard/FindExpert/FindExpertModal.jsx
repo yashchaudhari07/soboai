@@ -22,7 +22,7 @@ export default function FindExpertModal({ open, onClose, onNext }) {
 
   return (
     // Added 'p-4' to ensure modal doesn't touch screen edges on mobile
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/40 flex items-center font-plex-hebrew justify-center z-50 p-4">
 
       {/* CHANGED: w-[900px] -> w-full max-w-[900px] (Makes it fluid but caps at 900px) */}
       {/* CHANGED: p-8 -> p-5 md:p-8 (Less padding on mobile) */}

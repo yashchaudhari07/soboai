@@ -1,38 +1,32 @@
 import { useState } from "react";
+import { Outlet } from "react-router-dom"; 
 import Sidebar from "../components/Sidebar/Sidebar";
-import Experts from "../pages/Dashboard/Experts";
-import Home from "../pages/Dashboard/Home";
-import AIInsights from "../pages/Dashboard/AIInsights";
-import Engagement from "../pages/Dashboard/Engagement";
 
-export default function DashboardLayout() {
-  const [page, setPage] = useState("experts");
+export default function DashboardLayout({ formData }) {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="flex bg-[#EEF2FF] min-h-screen overflow-hidden">
+    // Main Container with PDF Background Color #EEF2FF
+    <div className="min-h-screen bg-[#EEF2FF] font-plex-hebrew flex">
 
-      {/* SIDEBAR ALWAYS VISIBLE */}
+      {/* SIDEBAR (Fixed Position inside Sidebar.jsx) */}
       <Sidebar
-        active={page}
-        onChange={setPage}
         collapsed={collapsed}
         setCollapsed={setCollapsed}
+        userLogo={formData?.step2?.logo}
       />
 
-      {/* MAIN CONTENT */}
+      {/* MAIN CONTENT AREA */}
       <div
-        className="flex-1 transition-all duration-300 p-6"
+        // Responsive Padding: p-4 (16px) on mobile, p-8 (32px) on desktop
+        className="flex-1 transition-all duration-300 p-4 md:p-8"
         style={{
-          marginLeft: collapsed ? "90px" : "220px",
-          maxWidth: "1650px",
-          marginRight: "auto",
+          marginLeft: collapsed ? "101px" : "235px", // Match Sidebar Widths
+          width: `calc(100% - ${collapsed ? "101px" : "235px"})`,
         }}
       >
-        {page === "dashboard" && <Home />}
-        {page === "ai" && <AIInsights />}
-        {page === "experts" && <Experts />}
-        {page === "engagement" && <Engagement />}
+        {/* <Outlet /> renders the current route component */}
+        <Outlet /> 
       </div>
 
     </div>

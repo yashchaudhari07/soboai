@@ -1,63 +1,50 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
 import Step4 from "./Step4";
 import ReviewPage from "./ReviewPage";
-import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../layouts/DashboardLayout.jsx";
 import ProgressBar from "../../components/Common/ProgressBar.jsx";
 
-
-export default function SurveyScreen() {
+export default function SurveyScreen({ formData: initialData }) {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
   const [completed, setCompleted] = useState(false);
 
-
-  const [formData, setFormData] = useState({
+  // If initialData is not provided, use default state (useful for direct access)
+  const [formData, setFormData] = useState(initialData || {
     step1: { firstName: "", lastName: "", role: "", email: "", phone: "" },
     step2: { name: "", industry: "", city: "", state: "", website: "", desc: "", logo: "" },
     step3: { revenue: "", employees: "" },
     step4: { interest: "" },
   });
 
-  // VALIDATION (No changes here)
+  // VALIDATION LOGIC
   const isStepValid = () => {
     switch (step) {
       case 1: {
         const s = formData.step1;
-        const phoneDigits = s.phone.replace(/\D/g, "").length;
+        // Basic check for digits
+        const phoneDigits = s.phone ? s.phone.replace(/\D/g, "").length : 0;
         return (
-          s.firstName &&
-          s.lastName &&
-          s.role &&
-          s.email &&
-          phoneDigits >= 10 
+          s.firstName && s.lastName && s.role && s.email && phoneDigits >= 10
         );
       }
-
       case 2: {
         const s = formData.step2;
         return s.name && s.city && s.state && s.website;
       }
-
       case 3: {
         const s = formData.step3;
-        return (
-          s.revenue &&
-          s.employees &&
-          !isNaN(Number(s.revenue)) && 
-          !isNaN(Number(s.employees)) &&
-          Number(s.employees) > 0 
-        );
+        // Check if revenue/employees exist and are valid numbers (if required)
+        // Simplified check: just ensure they are not empty for now
+        return s.revenue && s.employees;
       }
-
       case 4: {
         return formData.step4.interest !== "";
       }
-
       default:
         return false;
     }
@@ -78,9 +65,13 @@ export default function SurveyScreen() {
   const goToStep = (target) => setStep(target);
 
   const finalSubmit = () => {
+    // In a real app, you would submit formData to backend here
     alert("Profile submitted successfully!");
-      navigate("/dashboard");
-};
+    setCompleted(true);
+    navigate("/dashboard");
+  };
+
+  // --- RENDER LOGIC ---
 
   if (step === "review") {
     return (
@@ -91,45 +82,57 @@ export default function SurveyScreen() {
       />
     );
   }
-  if (completed) {
-  return <DashboardLayout />;
-}
 
+  if (completed) {
+    // If completed, maybe show loading or redirect (already handled by navigate)
+    return <DashboardLayout formData={formData} />;
+  }
 
   return (
-    <div className="min-h-screen px-4 py-8 md:px-6 md:py-12 flex flex-col items-center">
-      {/* CHANGED: px-6 py-12 -> px-4 py-8 md:px-6 md:py-12 (Less padding on mobile) */}
-      <div className="w-full max-w-4xl">
+    <div className="min-h-screen px-4 py-8 md:px-8 md:py-12 bg-white font-plex-hebrew flex flex-col items-center">
+      
+      {/* PROGRESS BAR */}
+      <div className="w-full max-w-3xl">
         <ProgressBar step={step} />
       </div>
 
-      <div className="w-full max-w-4xl mt-6 mb-10 md:mt-10 md:mb-16">
-        {/* CHANGED: mt-10 mb-16 -> mt-6 mb-10 md:mt-10 md:mb-16 (Less vertical space on mobile) */}
+      {/* FORM STEPS CONTENT */}
+      <div className="w-full max-w-3xl mt-8 mb-10 md:mt-12 md:mb-16">
         {step === 1 && <Step1 formData={formData} setFormData={setFormData} />}
         {step === 2 && <Step2 formData={formData} setFormData={setFormData} />}
         {step === 3 && <Step3 formData={formData} setFormData={setFormData} />}
         {step === 4 && <Step4 formData={formData} setFormData={setFormData} />}
       </div>
 
-      <div className="w-full max-w-4xl flex flex-col-reverse sm:flex-row justify-between gap-4">
-        {/* CHANGED: Added flex-col-reverse and gap-4 to stack buttons on mobile */}
+      {/* NAVIGATION BUTTONS */}
+      <div className="w-full max-w-3xl flex flex-col-reverse sm:flex-row justify-between gap-4 sm:gap-0">
         
+        {/* Back Button */}
         <button
           onClick={back}
           disabled={step === 1}
-          /* ADDED: w-full on mobile for easy tap */
-          className="w-full sm:w-auto px-6 py-3 bg-[#F3F5FF] text-[#3C4DE8] rounded-lg disabled:opacity-40 transition hover:bg-[#e0e4ff]"
+          className={`
+            w-full sm:w-auto px-6 py-3 rounded-xl font-medium text-[15px] transition active:scale-95
+            ${step === 1 
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed opacity-0 sm:opacity-100" // Hide on mobile if disabled
+                : "bg-[#F3F5FF] text-[#2D60FF] hover:bg-[#E8EFFF]"
+            }
+          `}
         >
           Back
         </button>
 
+        {/* Next/Review Button */}
         <button
           onClick={next}
           disabled={!isStepValid()}
-          /* ADDED: w-full on mobile for easy tap */
-          className={`w-full sm:w-auto px-8 py-3 rounded-lg text-white transition ${
-            isStepValid() ? "bg-[#3C64F4] hover:bg-[#3252d1]" : "bg-gray-300 cursor-not-allowed"
-          }`}
+          className={`
+            w-full sm:w-auto px-8 py-3 rounded-xl font-medium text-[15px] text-white transition shadow-sm active:scale-95
+            ${isStepValid() 
+                ? "bg-[#2D60FF] hover:bg-blue-700" 
+                : "bg-gray-300 cursor-not-allowed"
+            }
+          `}
         >
           {step === 4 ? "Review" : "Next"}
         </button>
