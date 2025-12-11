@@ -6,7 +6,7 @@ export default function ExpertsBanner({ onFind }) {
         bg-[#2D60FF] 
         h-[180px] sm:h-[150px] 
         rounded-xl 
-        px-4 sm:px-6 
+        px-8 sm:px-6 
         flex items-center justify-center 
         overflow-hidden
       "

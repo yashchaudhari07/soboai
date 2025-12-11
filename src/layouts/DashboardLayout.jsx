@@ -7,40 +7,27 @@ import Engagement from "../pages/Dashboard/Engagement";
 
 export default function DashboardLayout() {
   const [page, setPage] = useState("experts");
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div
-      className="
-        flex 
-        bg-[#E8EBFF] 
-        min-h-screen 
-        w-full
-        overflow-x-hidden
-      "
-    >
+    <div className="flex bg-[#EEF2FF] min-h-screen overflow-hidden">
 
-      {/* -------- LEFT SIDEBAR -------- */}
-      <div
-        className="
-          fixed 
-          md:relative 
-          z-50 
-          h-full
-        "
-      >
-        <Sidebar active={page} onChange={setPage} />
-      </div>
+      {/* SIDEBAR ALWAYS VISIBLE */}
+      <Sidebar
+        active={page}
+        onChange={setPage}
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+      />
 
-      {/* -------- RIGHT CONTENT -------- */}
+      {/* MAIN CONTENT */}
       <div
-        className="
-          flex-1 
-          p-4 sm:p-6 
-          md:ml-[200px] 
-          ml-[70px] 
-          transition-all 
-          duration-300
-        "
+        className="flex-1 transition-all duration-300 p-6"
+        style={{
+          marginLeft: collapsed ? "90px" : "220px",
+          maxWidth: "1650px",
+          marginRight: "auto",
+        }}
       >
         {page === "dashboard" && <Home />}
         {page === "ai" && <AIInsights />}

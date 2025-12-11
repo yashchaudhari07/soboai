@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Step1BusinessAreaModal from "./Step1BusinessArea";
-import Step2EngagementModal from "./Step2Engagement";
+import Step1BusinessAreaModal from "./Step1BusinessAreaModal";
+import Step2EngagementModal from "./Step2EngagementModal";
 import SuccessModal from "./SuccessModal";
 
 export default function FindExpertFlow({ open, onClose, onComplete }) {
