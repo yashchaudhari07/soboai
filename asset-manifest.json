@@ -1,15 +1,22 @@
 {
   "files": {
-    "main.css": "/soboai/static/css/main.fb763007.css",
-    "main.js": "/soboai/static/js/main.2508f58e.js",
+    "main.css": "/soboai/static/css/main.0f02664b.css",
+    "main.js": "/soboai/static/js/main.464095e6.js",
     "static/js/453.d2878248.chunk.js": "/soboai/static/js/453.d2878248.chunk.js",
+    "static/media/a5.svg": "/soboai/static/media/a5.480319c13d16e3d68e81804921953662.svg",
+    "static/media/a4.svg": "/soboai/static/media/a4.0299535326baf5a0c988bd5859f96d02.svg",
+    "static/media/a7.svg": "/soboai/static/media/a7.113d20cb7d51ab763483393d13ed9eae.svg",
+    "static/media/a3.svg": "/soboai/static/media/a3.9a74f406ff774353bc903156f6adcb7a.svg",
+    "static/media/a2.svg": "/soboai/static/media/a2.d60d37c60b6d44e671bb205af3ec78b7.svg",
+    "static/media/a1.svg": "/soboai/static/media/a1.38d8e71d9f69f67a0cc932e19f401ed6.svg",
     "index.html": "/soboai/index.html",
-    "main.fb763007.css.map": "/soboai/static/css/main.fb763007.css.map",
-    "main.2508f58e.js.map": "/soboai/static/js/main.2508f58e.js.map",
+    "static/media/a6.svg": "/soboai/static/media/a6.6c982a247f44eb9c2b8b5c5aa675560d.svg",
+    "main.0f02664b.css.map": "/soboai/static/css/main.0f02664b.css.map",
+    "main.464095e6.js.map": "/soboai/static/js/main.464095e6.js.map",
     "453.d2878248.chunk.js.map": "/soboai/static/js/453.d2878248.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb763007.css",
-    "static/js/main.2508f58e.js"
+    "static/css/main.0f02664b.css",
+    "static/js/main.464095e6.js"
   ]
 }
