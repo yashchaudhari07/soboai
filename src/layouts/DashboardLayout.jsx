@@ -1,32 +1,41 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom"; 
-import Sidebar from "../components/Sidebar/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar"; 
 
-export default function DashboardLayout({ formData }) {
+export default function DashboardLayout() {
+  
+  // Sidebar State
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    // Main Container with PDF Background Color #EEF2FF
-    <div className="min-h-screen bg-[#EEF2FF] font-plex-hebrew flex">
-
-      {/* SIDEBAR (Fixed Position inside Sidebar.jsx) */}
-      <Sidebar
-        collapsed={collapsed}
-        setCollapsed={setCollapsed}
-        userLogo={formData?.step2?.logo}
+    <div className="min-h-screen bg-[#EEF2FF] flex w-full font-plex-hebrew">
+      
+      {/* SIDEBAR (Fixed) */}
+      <Sidebar 
+        collapsed={collapsed} 
+        setCollapsed={setCollapsed} 
+        userLogo={null} 
       />
 
       {/* MAIN CONTENT AREA */}
-      <div
-        // Responsive Padding: p-4 (16px) on mobile, p-8 (32px) on desktop
-        className="flex-1 transition-all duration-300 p-4 md:p-8"
-        style={{
-          marginLeft: collapsed ? "101px" : "235px", // Match Sidebar Widths
+      <div 
+        className="flex-1 transition-all duration-300"
+        style={{ 
+          // Sidebar च्या मागे कंटेंट लपू नये म्हणून मार्जिन
+          marginLeft: collapsed ? "101px" : "235px",
+          
+          // Width कॅल्क्युलेशन
           width: `calc(100% - ${collapsed ? "101px" : "235px"})`,
+          
+          // IMP: इथे Padding 0 केली आहे, कारण Pages (Experts) स्वतःची Padding घेतील.
+          // यामुळे Sidebar आणि Content मधला गॅप कमी होईल.
+          padding: "0px" 
         }}
       >
-        {/* <Outlet /> renders the current route component */}
-        <Outlet /> 
+        {/* इथे तुमचे Experts, AI Insights पेजेस रेंडर होतील */}
+        <div className="p-6 md:p-8"> 
+           <Outlet /> 
+        </div>
       </div>
 
     </div>

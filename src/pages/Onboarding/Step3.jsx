@@ -25,7 +25,7 @@ export default function Step3({ formData, setFormData, onBack, onNext }) {
 
       {/* FORM FIELDS SECTION */}
       {/* Responsive Grid: 1 Column on Mobile, 2 Columns on Desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mt-6 md:mt-8"> 
+      <div className=" gap-5 md:gap-6 mt-6 md:mt-8"> 
 
         {/* REVENUE Field */}
         <div>
@@ -44,7 +44,7 @@ export default function Step3({ formData, setFormData, onBack, onNext }) {
 
         {/* EMPLOYEES Field */}
         <div>
-          <label htmlFor="num-employees" className="block text-[14px] font-medium text-gray-700 mb-1.5">
+          <label htmlFor="num-employees" className="block text-[14px] font-medium text-gray-700 mb-1.5 mt-8">
             Number of employees
           </label>
           <input

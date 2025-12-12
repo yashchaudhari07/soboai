@@ -35,28 +35,16 @@ export default function Step1BusinessAreaModal({ area, onSelect, onNext, onClose
             </button>
           </div>
           <div className="mb-8">
-            <div className="flex justify-between items-end mb-2">
-              <p className="text-[13px] text-[#2D2D2D] font-medium">Step 1 of 2</p>
-              <span className="text-[13px] text-[#2D2D2D]">50% Complete</span>
-            </div>
+            
             {/* Visual Progress Bar Line */}
-            <div className="w-full h-1 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-[#2D60FF] rounded-full" style={{ width: '50%' }}></div>
-              <div className="h-full  bg-gray-100 rounded-full" style={{ width: '50%' }}></div>
+          
 
-            </div>
-
-            <div className="mt-6">
-              <h1 className="text-[26px] font-bold text-[#1A1A1A] mb-2">Choose an engagement</h1>
-              <p className="text-[15px] text-[#2D2D2D]">
-                Select an engagement type, how you want an expert to help you
-              </p>
-            </div>
+            
           </div>
 
           {/* Sub Header Text */}
           <div className="mt-5">
-            <p className="text-[13px] text-gray-500 font-medium mb-1">Step 1 of 2</p>
+            <p className="text-[13px] text-[#2D60FF] font-medium mb-1">Step 1 of 2</p>
             <h3 className="text-[26px] font-bold text-[#1A1A1A]">Choose your business area</h3>
             <p className="text-gray-500 text-[15px] mt-2">
               Select the area where you need expert insights.
@@ -77,7 +65,7 @@ export default function Step1BusinessAreaModal({ area, onSelect, onNext, onClose
                     border rounded-xl p-5 cursor-pointer transition-all duration-200 flex flex-col h-full min-h-[150px] relative
                     ${selected
                       ? "border-[#2D60FF] bg-[#F8FAFF] shadow-[0_0_0_1px_#2D60FF]"
-                      : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
+                      : "border-[#DEDEDE] bg-white hover:border-gray-300 hover:shadow-sm"
                     }
                   `}
                 >
