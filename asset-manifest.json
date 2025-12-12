@@ -1,22 +1,35 @@
 {
   "files": {
-    "main.css": "/soboai/static/css/main.61f3e371.css",
-    "main.js": "/soboai/static/js/main.73415784.js",
+    "main.css": "/soboai/static/css/main.ca7564ba.css",
+    "main.js": "/soboai/static/js/main.d69f9653.js",
     "static/js/453.d2878248.chunk.js": "/soboai/static/js/453.d2878248.chunk.js",
+    "static/media/s4.svg": "/soboai/static/media/s4.75ae93a4c4341240d648c0dd17f60a3b.svg",
+    "static/media/s3.svg": "/soboai/static/media/s3.cfbe09190813f3a45b9c52814f50e995.svg",
+    "static/media/f1.svg": "/soboai/static/media/f1.1ef991a4e02284efc0c12fa35deb03f3.svg",
+    "static/media/f8.svg": "/soboai/static/media/f8.f7cf9701610ac75362145ef5c4de9edf.svg",
     "static/media/a5.svg": "/soboai/static/media/a5.480319c13d16e3d68e81804921953662.svg",
+    "static/media/f4.svg": "/soboai/static/media/f4.aad08cc4bd2bea8eeb1152b9884b2e0d.svg",
+    "static/media/f7.svg": "/soboai/static/media/f7.89c5fbe66d496c97351b1f82c60ac221.svg",
     "static/media/a4.svg": "/soboai/static/media/a4.0299535326baf5a0c988bd5859f96d02.svg",
+    "static/media/f9.svg": "/soboai/static/media/f9.3b060ef708c281b978954ca2e9bef6dd.svg",
+    "static/media/f5.svg": "/soboai/static/media/f5.cf88bd826bb5d49df21eae2c95c85e17.svg",
     "static/media/a7.svg": "/soboai/static/media/a7.113d20cb7d51ab763483393d13ed9eae.svg",
+    "static/media/s2.svg": "/soboai/static/media/s2.bcbf2504daa6b410f6a8ad4461ba9c40.svg",
+    "static/media/f2.svg": "/soboai/static/media/f2.ab378f23c150d302c36df4f1f7eb48c6.svg",
+    "static/media/s1.svg": "/soboai/static/media/s1.89e75a844ecb71b18ea3e06476642ae2.svg",
+    "static/media/f6.svg": "/soboai/static/media/f6.eb66ae071a24552eece89f908cdcdff8.svg",
+    "static/media/f3.svg": "/soboai/static/media/f3.f974bae3f3a4358efde3bbe0929eaf27.svg",
     "static/media/a3.svg": "/soboai/static/media/a3.9a74f406ff774353bc903156f6adcb7a.svg",
     "static/media/a2.svg": "/soboai/static/media/a2.d60d37c60b6d44e671bb205af3ec78b7.svg",
     "static/media/a1.svg": "/soboai/static/media/a1.38d8e71d9f69f67a0cc932e19f401ed6.svg",
     "index.html": "/soboai/index.html",
     "static/media/a6.svg": "/soboai/static/media/a6.6c982a247f44eb9c2b8b5c5aa675560d.svg",
-    "main.61f3e371.css.map": "/soboai/static/css/main.61f3e371.css.map",
-    "main.73415784.js.map": "/soboai/static/js/main.73415784.js.map",
+    "main.ca7564ba.css.map": "/soboai/static/css/main.ca7564ba.css.map",
+    "main.d69f9653.js.map": "/soboai/static/js/main.d69f9653.js.map",
     "453.d2878248.chunk.js.map": "/soboai/static/js/453.d2878248.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.61f3e371.css",
-    "static/js/main.73415784.js"
+    "static/css/main.ca7564ba.css",
+    "static/js/main.d69f9653.js"
   ]
 }
