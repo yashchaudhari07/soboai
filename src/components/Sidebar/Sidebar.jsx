@@ -37,19 +37,19 @@ export default function Sidebar({ collapsed, setCollapsed, userLogo }) {
     <div
       className="fixed top-0 left-0 h-screen flex flex-col justify-between transition-all duration-300 z-50 font-plex-hebrew overflow-y-auto custom-scrollbar"
       style={{
-        width: collapsed ? "101px" : "235px", // Desktop Width
+        width: collapsed ? "101px" : "235px",
         backgroundColor: bgColor,
         borderRight: `1px solid ${borderColor}`,
-        padding: "24px 16px",
+        padding: "32px 16px", // Top padding थोडी वाढवली
         boxSizing: "border-box",
         maxHeight: "100vh" 
       }}
     >
       {/* --- TOP SECTION --- */}
-      {/* items-center काढून टाकले जेणेकरून आपण आतल्या घटकांना मॅन्युअली align करू शकू */}
-      <div className="flex flex-col w-full" style={{ gap: "40px" }}> 
+      {/* GAP INCREASED: 40px -> 50px */}
+      <div className="flex flex-col w-full" style={{ gap: "50px" }}> 
         
-        {/* Toggle Button Container - RIGHT ALIGNED */}
+        {/* Toggle Button - RIGHT ALIGNED */}
         <div className="w-full flex justify-end">
             <button
             onClick={() => setCollapsed(!collapsed)}
@@ -70,7 +70,8 @@ export default function Sidebar({ collapsed, setCollapsed, userLogo }) {
         </div>
 
         {/* Menu Items */}
-        <div className="flex flex-col w-full" style={{ gap: "10px" }}>
+        {/* GAP INCREASED: 10px -> 24px (For PDF Layout spacing) */}
+        <div className="flex flex-col w-full" style={{ gap: "24px" }}>
             {menu.map((m) => {
                 const isActive = location.pathname === m.path;
                 const isHovered = hoveredItem === m.id;
@@ -86,7 +87,6 @@ export default function Sidebar({ collapsed, setCollapsed, userLogo }) {
                         backgroundColor: "transparent", 
                         width: "100%",
                         flexDirection: collapsed ? "column" : "row",
-                        // जर collapsed असेल तर सेंटर, नाहीतर डावीकडे (Start)
                         justifyContent: collapsed ? "center" : "flex-start",
                         padding: 0, 
                         minHeight: "40px"
@@ -117,11 +117,11 @@ export default function Sidebar({ collapsed, setCollapsed, userLogo }) {
                     <span
                     style={{
                         fontFamily: "'IBM Plex Sans Hebrew', sans-serif",
-                        fontSize: "14px",
-                        fontWeight: "400",
+                        fontSize: "15px", // Font size थोडी वाढवली (Clear दिसण्यासाठी)
+                        fontWeight: "500",
                         color: mainColor,
                         marginTop: collapsed ? "4px" : "0px", 
-                        marginLeft: collapsed ? "0px" : "12px",
+                        marginLeft: collapsed ? "0px" : "16px", // Gap वाढवला
                         textAlign: "center",
                         whiteSpace: "nowrap",
                         lineHeight: "1.2",
@@ -137,15 +137,14 @@ export default function Sidebar({ collapsed, setCollapsed, userLogo }) {
       </div>
 
       {/* --- BOTTOM SECTION --- */}
-      {/* येथे items-center ऐवजी items-start वापरले आहे (LEFT ALIGNMENT साठी) */}
       <div 
         className="flex flex-col items-start w-full" 
-        style={{ gap: "20px", marginTop: "auto", paddingTop: "20px" }} 
+        style={{ gap: "24px", marginTop: "auto", paddingTop: "20px" }} 
       >
         
         {/* Notification */}
         <div 
-            className="flex items-center justify-center cursor-pointer relative hover:opacity-100 opacity-70 transition"
+            className="flex items-center justify-center cursor-pointer relative hover:scale-110 transition-transform duration-200"
             style={{ width: "40px", height: "40px" }}
         >
            <img 
@@ -161,7 +160,7 @@ export default function Sidebar({ collapsed, setCollapsed, userLogo }) {
 
         {/* Settings */}
         <div 
-            className="flex items-center justify-center cursor-pointer hover:opacity-100 opacity-70 transition"
+            className="flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200"
             style={{ width: "40px", height: "40px" }}
         >
            <img 
@@ -179,7 +178,7 @@ export default function Sidebar({ collapsed, setCollapsed, userLogo }) {
              {userLogo ? (
                 <img 
                   src={userLogo instanceof File ? URL.createObjectURL(userLogo) : userLogo} 
-                  className="w-full h-full rounded-xl object-cover border border-gray-200" 
+                  className="w-full h-full rounded-xl object-cover border border-gray-200 shadow-sm" 
                   alt="User Profile"
                 />
               ) : (

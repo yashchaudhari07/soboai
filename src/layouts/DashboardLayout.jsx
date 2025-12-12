@@ -21,19 +21,18 @@ export default function DashboardLayout() {
       <div 
         className="flex-1 transition-all duration-300"
         style={{ 
-          // Sidebar च्या मागे कंटेंट लपू नये म्हणून मार्जिन
+          // Sidebar margin
           marginLeft: collapsed ? "101px" : "235px",
           
-          // Width कॅल्क्युलेशन
+          // Width calculation
           width: `calc(100% - ${collapsed ? "101px" : "235px"})`,
           
-          // IMP: इथे Padding 0 केली आहे, कारण Pages (Experts) स्वतःची Padding घेतील.
-          // यामुळे Sidebar आणि Content मधला गॅप कमी होईल.
+          // Outer container has NO padding
           padding: "0px" 
         }}
       >
-        {/* इथे तुमचे Experts, AI Insights पेजेस रेंडर होतील */}
-        <div className="p-6 md:p-8"> 
+        {/* PADDING REDUCED HERE to minimize gap between sidebar/top and content */}
+        <div className="p-3 md:p-4"> 
            <Outlet /> 
         </div>
       </div>
