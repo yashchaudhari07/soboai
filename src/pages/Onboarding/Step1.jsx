@@ -4,6 +4,7 @@ import "react-phone-input-2/lib/style.css";
 export default function Step1({ formData, setFormData }) {
   const s = formData.step1;
 
+  // Function to update state
   const update = (k, v) =>
     setFormData((p) => ({
       ...p,
@@ -14,46 +15,52 @@ export default function Step1({ formData, setFormData }) {
     <div className="w-full font-plex-hebrew">
 
       {/* HEADER */}
-      <h1 className="text-[22px] md:text-[26px] font-semibold text-gray-900 leading-tight">
+      <h1 className="text-xl sm:text-2xl md:text-[26px] font-semibold text-gray-900 leading-tight">
         Let's start with your details
       </h1>
 
-      <p className="text-gray-500 mt-2 text-[14px] md:text-[16px]">
+      <p className="text-gray-500 mt-2 text-sm sm:text-base">
         These details help personalize your business onboarding experience.
       </p>
 
       {/* FORM GRID */}
-      {/* Mobile: 1 Col | Desktop: 2 Cols */}
+      {/* Mobile: 1 Column | Desktop: 2 Columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mt-6 md:mt-8">
 
-        {/* First Name */}
+        {/* First Name (Mandatory) */}
         <div>
-          <label className="text-[14px] font-medium text-gray-700 mb-1.5 block">First name *</label>
+          <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+            First name <span className="text-[#FF4D4F]">*</span>
+          </label>
           <input
-            value={s.firstName}
+            value={s.firstName || ""}
             onChange={(e) => update("firstName", e.target.value)}
             placeholder="Jane"
             className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-[#FCFCFC] text-[15px] focus:outline-none focus:border-[#2D60FF] transition-colors placeholder-gray-400"
           />
         </div>
 
-        {/* Last Name */}
+        {/* Last Name (Mandatory) */}
         <div>
-          <label className="text-[14px] font-medium text-gray-700 mb-1.5 block">Last name *</label>
+          <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+            Last name <span className="text-[#FF4D4F]">*</span>
+          </label>
           <input
-            value={s.lastName}
+            value={s.lastName || ""}
             onChange={(e) => update("lastName", e.target.value)}
             placeholder="Doe"
             className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-[#FCFCFC] text-[15px] focus:outline-none focus:border-[#2D60FF] transition-colors placeholder-gray-400"
           />
         </div>
 
-        {/* Role */}
+        {/* Role (Mandatory) */}
         <div>
-          <label className="text-[14px] font-medium text-gray-700 mb-1.5 block">Role *</label>
+          <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+            Role <span className="text-[#FF4D4F]">*</span>
+          </label>
           <div className="relative">
             <select
-              value={s.role}
+              value={s.role || ""}
               onChange={(e) => update("role", e.target.value)}
               className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-[#FCFCFC] text-[15px] focus:outline-none focus:border-[#2D60FF] transition-colors appearance-none text-gray-700"
             >
@@ -70,11 +77,13 @@ export default function Step1({ formData, setFormData }) {
           </div>
         </div>
 
-        {/* Email */}
+        {/* Email (OPTIONAL - No Red Star) */}
         <div>
-          <label className="text-[14px] font-medium text-gray-700 mb-1.5 block">Email address *</label>
+          <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+            Email address <span className="text-gray-400 font-normal ml-1 text-xs"></span>
+          </label>
           <input
-            value={s.email}
+            value={s.email || ""}
             onChange={(e) => update("email", e.target.value)}
             placeholder="jane@example.com"
             className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-[#FCFCFC] text-[15px] focus:outline-none focus:border-[#2D60FF] transition-colors placeholder-gray-400"
@@ -83,30 +92,32 @@ export default function Step1({ formData, setFormData }) {
 
       </div>
 
-      {/* PHONE NUMBER (Full Width) */}
+      {/* PHONE NUMBER (OPTIONAL - No Red Star) */}
       <div className="mt-5 md:mt-6">
-        <label className="text-[14px] font-medium text-gray-700 mb-1.5 block">Phone number *</label>
+        <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+          Phone number <span className="text-gray-400 font-normal ml-1 text-xs"></span>
+        </label>
 
         <PhoneInput
           country="us"
-          value={s.phone}
+          value={s.phone || ""}
           onChange={(v) => update("phone", v)}
           enableSearch
           
           /* Full width container */
           containerClass="!w-full"
           
-          /* Input Styling to match other inputs */
+          /* Input Styling */
           inputStyle={{ 
             width: '100%', 
             height: '48px', 
             fontSize: '15px', 
             backgroundColor: '#FCFCFC',
-            borderRadius: '0.75rem', // rounded-xl
-            border: '1px solid #d1d5db' // gray-300
+            borderRadius: '0.75rem', 
+            border: '1px solid #d1d5db' 
           }}
           
-          /* Button (Flag) Styling */
+          /* Flag Button Styling */
           buttonStyle={{
             backgroundColor: '#FCFCFC',
             borderColor: '#d1d5db',

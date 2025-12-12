@@ -1,20 +1,18 @@
+// src/App.js
+
 import { useState } from "react";
 import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-
-// पेजेस
-import Home from "./pages/Dashboard/Home"; 
+        // नवीन SignIn file
+import SurveyScreen from "./pages/Onboarding/SurveyScreen";
+// --- Dashboard ---
 import DashboardLayout from "./layouts/DashboardLayout";
-import Experts from "./pages/Dashboard/Experts"; // Experts Page Import
+import Experts from "./pages/Dashboard/Experts";
 import AIInsights from "./pages/Dashboard/AIInsights";
 import Engagement from "./pages/Dashboard/Engagement";
-
-// Dashboard Home (जर Experts पेज नसेल तर हे दिसेल)
-const DashboardHome = () => (
-  <div className="p-8 font-plex-hebrew">
-    <h1 className="text-3xl font-bold text-[#2D60FF]">Welcome to Dashboard</h1>
-    <p className="text-gray-500 mt-2">Select an option from the sidebar.</p>
-  </div>
-);
+import SignIn from "./pages/Dashboard/SignIn";
+import SignUp from "./pages/Dashboard/SignUp";
+import FrontPage from "./pages/Dashboard/FrontPage";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -27,24 +25,28 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* --- 1. SURVEY / ONBOARDING (No Sidebar) --- */}
+        {/* 1. Website Landing Page */}
+        <Route path="/" element={<FrontPage />} />
+        
+        {/* 2. Authentication Flow */}
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+
+        {/* 3. Onboarding (Survey) - फक्त Login झाल्यावर इथे यायचे */}
         <Route 
-          path="/" 
-          element={<Home formData={formData} setFormData={setFormData} />} 
+          path="/onboarding" 
+          element={<SurveyScreen formData={formData} setFormData={setFormData} />} 
         />
         
-        {/* --- 2. MAIN DASHBOARD (With Sidebar) --- */}
+        {/* 4. Dashboard (Future Steps) */}
         <Route element={<DashboardLayout />}>
-            
-            {/* Dashboard वर बाय डीफॉल्ट Experts पेज दाखवूया किंवा Home */}
-            <Route path="/dashboard" element={<Experts />} /> 
-            
+            <Route path="/dashboard" element={<Dashboard/>} /> 
             <Route path="/experts" element={<Experts />} />
             <Route path="/ai-insight" element={<AIInsights />} />
             <Route path="/engagement" element={<Engagement />} />
-
         </Route>
 
+        {/* Redirect unknown routes */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

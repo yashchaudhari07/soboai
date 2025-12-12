@@ -1,71 +1,22 @@
 import { useState } from "react";
 
-// 👇 ही लाईन महत्वाची आहे, ही चेक करा
+// Components Imports
 import ExpertsBanner from "./components/ExpertsBanner"; 
 import FindExpertFlow from "./FindExpert/FindExpertFlow";
 import ExpertDetailPage from "./components/ExpertDetailPage";
 
 const TABS = ["All", "Requested", "Rejected", "Cancelled"];
 
-const defaultHistory = [
-  {
-    id: 1,
-    area: "Technology",
-    status: "Requested",
-    engagement: "Fractional",
-    submitted: "18th Jun, 2025",
-    statusText: "Your consultant has made an engagement plan for your business. Review the plan details to begin next step",
-  },
-  {
-    id: 2,
-    area: "Marketing",
-    status: "Rejected",
-    engagement: "Fractional",
-    submitted: "18th Jun, 2025",
-    statusText: "Your consultant has made an engagement plan for your business. Review the plan details to begin next step",
-  },
-  {
-    id: 3,
-    area: "Technology",
-    status: "Deleted",
-    engagement: "Fractional",
-    submitted: "18th Jun, 2025",
-    statusText: "Your consultant has made an engagement plan for your business. Review the plan details to begin next step",
-  },
-  {
-    id: 4,
-    area: "Finance",
-    status: "Requested",
-    engagement: "Fractional",
-    submitted: "18th Jun, 2025",
-    statusText: "Your consultant has made an engagement plan for your business. Review the plan details to begin next step",
-  },
-  {
-    id: 5,
-    area: "Finance",
-    status: "SOW under review",
-    engagement: "Fractional",
-    submitted: "18th Jun, 2025",
-    statusText: "Your consultant has made an engagement plan for your business. Review the plan details to begin next step",
-  },
-  {
-    id: 6,
-    area: "Technology",
-    status: "Rejected",
-    engagement: "Fractional",
-    submitted: "18th Jun, 2025",
-    statusText: "Your consultant has made an engagement plan for your business. Review the plan details to begin next step",
-  }
-];
-
 export default function Experts() {
   const [finderOpen, setFinderOpen] = useState(false);
-  const [history, setHistory] = useState(defaultHistory);
+  
+  // Change 1: सुरुवातीला History रिकामी ठेवली आहे (Empty State दिसण्यासाठी)
+  const [history, setHistory] = useState([]); 
+  
   const [activeTab, setActiveTab] = useState("All");
   const [selected, setSelected] = useState(null);
 
-  const forceEmptyView = false; 
-
+  // Helper: Status नुसार कलर्स (PDF प्रमाणे)
   const getStatusStyle = (status) => {
     switch (status) {
       case "Requested":
@@ -83,35 +34,51 @@ export default function Experts() {
     }
   };
 
-  const getIcon = (area, isDeleted) => {
+  // Helper: Area नुसार Icon आणि Color
+  const getIcon = (areaRaw, isDeleted) => {
+    const area = areaRaw ? areaRaw.toLowerCase() : "";
     const iconClass = isDeleted ? "w-6 h-6 text-[#DEDEDE]" : "w-6 h-6";
-    const techColor = isDeleted ? "#DEDEDE" : "#3B82F6"; 
-    const markColor = isDeleted ? "#DEDEDE" : "#22C55E"; 
-    const finColor  = isDeleted ? "#DEDEDE" : "#EF4444"; 
+    
+    // Colors configuration
+    const colors = {
+      technology: "#3B82F6", // Blue
+      marketing: "#22C55E",  // Green
+      finance: "#EF4444",    // Red
+      sales: "#F59E0B",      // Yellow/Orange
+      hr: "#EC4899",         // Pink
+      operations: "#8B5CF6", // Purple
+      strategy: "#6366F1",   // Indigo
+      leadership: "#14B8A6", // Teal
+      management: "#F97316", // Orange
+    };
 
-    if (area === "Technology") return (
-      <svg className={iconClass} style={{ color: techColor }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+    const color = isDeleted ? "#DEDEDE" : (colors[area] || "#2D60FF");
+
+    // Generic Icon Path (Dashboard icon style)
+    return (
+      <svg className={iconClass} style={{ color: color }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
     );
-    if (area === "Marketing") return (
-      <svg className={iconClass} style={{ color: markColor }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" /></svg>
-    );
-    if (area === "Finance") return (
-      <svg className={iconClass} style={{ color: finColor }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-    );
-    return <div className="w-6 h-6 bg-gray-300 rounded-full"></div>;
   };
 
   const formatSubmittedDate = (dateVal) => {
     if (!dateVal) return "";
-    return dateVal instanceof Date ? dateVal.toDateString() : dateVal;
+    return dateVal instanceof Date 
+      ? dateVal.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) 
+      : dateVal;
   };
+
+  // Helper: Capitalize first letter (technology -> Technology)
+  const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
 
   if (selected) {
     return (
       <ExpertDetailPage
         data={{
           ...selected,
-          submitted: formatSubmittedDate(selected.submitted), 
+          area: capitalize(selected.area), // Display Capitalized
+          submitted: selected.submitted instanceof Date ? selected.submitted : new Date(), 
         }}
         onBack={() => setSelected(null)}
       />
@@ -126,12 +93,10 @@ export default function Experts() {
   const isEmpty = history.length === 0;
 
   return (
-    // RESPONSIVE CONTAINER: p-4 (mobile) -> p-8 (desktop)
     <div 
       className="p-4 md:p-8 bg-white rounded-2xl min-h-screen font-plex-hebrew" 
       style={{
         boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
-        marginLeft: "0px"
       }}
     >
 
@@ -139,14 +104,14 @@ export default function Experts() {
       <h1 className="text-[20px] md:text-[26px] font-semibold mb-4 md:mb-6 text-gray-900">Experts</h1>
 
       {/* BANNER */}
-      {/* ExpertsBanner वापरताना वर import असणे गरजेचे आहे */}
       <ExpertsBanner onFind={() => setFinderOpen(true)} />
 
       {/* FILTER ROW */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mt-6 md:mt-8 mb-4 md:mb-6 gap-4">
         <h2 className="text-[18px] md:text-[20px] font-semibold text-gray-900">Expert match history</h2>
         
-        {(!isEmpty && !forceEmptyView) && (
+        {/* फक्त जेव्हा हिस्ट्री असेल तेव्हाच टॅब्स दिसतील */}
+        {!isEmpty && (
           <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
             {TABS.map((tab) => (
               <button
@@ -169,23 +134,33 @@ export default function Experts() {
       </div>
 
       {/* === CONTENT AREA === */}
-      {(forceEmptyView || isEmpty) ? (
+      {/* Change 2: जर हिस्ट्री रिकामी असेल तर Empty Box दाखवा */}
+      {isEmpty ? (
         
-        <div className="flex flex-col items-center justify-center py-12 md:py-20 bg-[#EEF2FF] rounded-xl gap-4 md:gap-6 px-4 text-center">
-          <div className="w-12 h-12 md:w-16 md:h-16 bg-[#EEF2FF] rounded-full flex items-center justify-center mb-2 md:mb-4">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 md:w-auto md:h-auto">
-              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#2D60FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <div className="flex flex-col items-center justify-center py-16 md:py-24 bg-[#F8FAFF] border border-dashed border-[#DCE4FE] rounded-2xl gap-4 md:gap-5 px-4 text-center mt-4">
+          
+          {/* Empty Icon (Blue Question Mark Circle) */}
+          <div className="w-16 h-16 bg-[#EEF2FF] rounded-full flex items-center justify-center mb-2">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="#2D60FF" strokeWidth="2"/>
               <path d="M9.09 9C9.3251 8.33167 9.78915 7.76811 10.4 7.40913C11.0108 7.05016 11.7289 6.91894 12.4272 7.03871C13.1255 7.15849 13.7588 7.52152 14.2151 8.06353C14.6713 8.60553 14.9211 9.29152 14.92 10C14.92 12 11.92 13 11.92 13" stroke="#2D60FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 17H12.01" stroke="#2D60FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="12" cy="17" r="1" fill="#2D60FF"/>
             </svg>
           </div>
-          <p className="text-[#2D2D2D] text-sm md:text-[15px] leading-relaxed max-w-sm">
+
+          <h3 className="text-[#2D2D2D] text-[16px] font-semibold">
+            No requests yet
+          </h3>
+          
+          <p className="text-[#808080] text-sm md:text-[15px] leading-relaxed max-w-sm">
             You haven't made any requests yet! Tell us your challenge and we'll match you with an expert.
           </p>
+
         </div>
 
       ) : (
 
+        // --- GRID OF CARDS (After Submission) ---
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {filtered.map((item) => {
              const style = getStatusStyle(item.status);
@@ -212,7 +187,7 @@ export default function Experts() {
                   </div>
 
                   <span
-                    className="px-2 py-1 md:px-3 md:py-1 rounded-xl text-[11px] md:text-[12px] font-medium whitespace-nowrap"
+                    className="px-3 py-1 rounded-full text-[12px] font-bold whitespace-nowrap"
                     style={{ backgroundColor: badgeBg, color: badgeTx }}
                   >
                     {item.status}
@@ -221,15 +196,15 @@ export default function Experts() {
 
                 {/* TITLE */}
                 <h3 
-                  className={`font-semibold text-[15px] md:text-[16px] mb-4 md:mb-6 ${!isDeleted ? "text-gray-900" : ""}`}
+                  className={`font-bold text-[16px] mb-4 md:mb-6 ${!isDeleted ? "text-gray-900" : ""}`}
                   style={{ color: isDeleted ? '#DEDEDE' : undefined }}
                 >
-                  {item.area}
+                  {capitalize(item.area)}
                 </h3>
 
                 {/* DATE & TYPE */}
                 <div 
-                  className={`flex flex-col items-end text-right text-[11px] md:text-[12px] mb-4 font-medium ${!isDeleted ? "text-gray-500" : ""}`}
+                  className={`flex flex-col items-end text-right text-[12px] mb-4 font-medium ${!isDeleted ? "text-gray-500" : ""}`}
                   style={{ color: isDeleted ? '#DEDEDE' : undefined }}
                 >
                   <p>Submitted on - 
@@ -254,14 +229,14 @@ export default function Experts() {
 
                 {/* STATUS TEXT */}
                 <div 
-                  className={`text-[11px] md:text-[12px] leading-[18px] ${!isDeleted ? "text-[#D0D0D0]" : ""}`}
+                  className={`text-[12px] leading-[18px] ${!isDeleted ? "text-[#D0D0D0]" : ""}`}
                   style={{ color: isDeleted ? '#808080' : undefined }}
                 >
                   <span 
-                    className={`font-medium ${!isDeleted ? "text-gray-900" : ""}`}
+                    className={`font-semibold ${!isDeleted ? "text-gray-900" : ""}`}
                     style={{ color: isDeleted ? '#808080' : undefined }}
                   >Status - </span>
-                 <span className="text-[#2D2D2D]"> {item.statusText} </span>
+                 <span className="text-[#505050]"> {item.statusText} </span>
                 </div>
 
               </div>
@@ -275,16 +250,17 @@ export default function Experts() {
         open={finderOpen}
         onClose={() => setFinderOpen(false)}
         onComplete={(entry) =>
+          // Change 3: नवीन एंट्री ॲड करणे
           setHistory([
             ...history,
             {
               id: Date.now(),
-              ...entry,
-              submitted: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+              area: entry.area, // e.g. "marketing"
+              engagement: entry.engagement, // e.g. "Fractional"
+              details: entry.details,
+              submitted: new Date(),
               status: "Requested",
-              statusText: "Your request has been received. We are matching you with an expert.",
-              requirement: entry.details || "No details provided",
-              engagement: "Fractional"
+              statusText: "Your request has been received. Our team will review and connect you with the best matching expert.",
             },
           ])
         }

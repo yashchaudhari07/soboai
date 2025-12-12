@@ -36,7 +36,7 @@ export default function Step2({ formData, setFormData }) {
       </p>
 
       {/* LOGO UPLOAD SECTION */}
-      <div className="flex items-center gap-4 mt-6 md:mt-8 p-4 bg-gray-50 rounded-xl border border-gray-100">
+      <div className="flex items-center gap-4 mt-6 md:mt-8 p-4  rounded-xl">
         
         {/* Logo Preview Circle */}
         <div className="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0 relative shadow-sm">
@@ -68,8 +68,8 @@ export default function Step2({ formData, setFormData }) {
         </div>
 
         <div>
-          <h3 className="font-semibold text-gray-900 text-[15px]">Business Logo</h3>
-          <label className="text-[13px] text-[#2D60FF] font-medium cursor-pointer hover:underline">
+          <h3 className="font-semibold text-[#262626] text-[15px]">Business Logo</h3>
+          <label className="text-[13px] text-[#262626] font-regular cursor-pointer hover:underline">
             Click to upload logo
             <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
           </label>
@@ -81,7 +81,7 @@ export default function Step2({ formData, setFormData }) {
 
         {/* Business Name */}
         <div>
-          <label className="text-[14px] font-medium text-gray-700 mb-1.5 block">Business name *</label>
+          <label className="text-[14px] font-medium text-gray-700 mb-1.5 block">Business name <span style={{color:'#FF4D4F'}}>*</span></label>
           <input
             placeholder="Sobo, Inc"
             value={s.name}
