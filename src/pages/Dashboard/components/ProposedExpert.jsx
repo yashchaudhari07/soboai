@@ -1,277 +1,218 @@
-import React from 'react'
+import React from 'react';
+import { BadgeCheck } from 'lucide-react'; // Checkmark Icon
 
 export const ProposedExpert = () => {
-    return (
-        <div>
-            <h3 className="mt-10 text-[18px] font-semibold text-gray-900 mb-4">
-                Proposed expert
-            </h3>
+    return (
+        <div className="w-full font-sans">
+            
+            {/* Header */}
+            <h3 className="mt-6 text-[18px] font-bold text-[#101828] mb-4">
+                Proposed expert
+            </h3>
 
-            {/* Expert Name + Experience */}
-            <div
-                className="w-full bg-[#2D60FF] rounded-2xl flex flex-col items-center justify-center py-10"
-                style={{ textAlign: "center" }}
-            >
-                {/* Avatar */}
-                <img
-                    src="/assets/expert-avatar.png"
-                    alt="Expert"
-                    className="w-[80px] h-[80px] rounded-full mb-4"
-                />
+            {/* --- BLUE PROFILE CARD (Matching Profile.pdf) --- */}
+            <div className="w-full bg-[#2D60FF] rounded-2xl flex flex-col items-center justify-center py-10 px-6 text-center shadow-sm">
+                
+                {/* Avatar */}
+                <div className="mb-4">
+                    <img
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt="Albert Flores"
+                        className="w-[80px] h-[80px] rounded-full border-2 border-white object-cover shadow-md"
+                    />
+                </div>
 
-                {/* Name + Experience */}
-                <p className="text-white font-semibold text-[18px]">
-                    Albert Flores | Years of experience - 15 yrs
-                </p>
+                {/* Name + Experience */}
+                <h2 className="text-white text-[18px] font-semibold tracking-wide">
+                    Albert Flores <span className="font-normal opacity-90">| Years of experience - 15 yrs</span>
+                </h2>
 
-                {/* Education */}
-                <p className="text-white text-[15px] mt-1">
-                    <span className="font-semibold">Education -</span> UGA: Construction Management
-                </p>
+                {/* Education */}
+                <p className="text-white text-[15px] mt-1.5 opacity-95">
+                    <span className="font-semibold">Education -</span> UGA: Construction Management
+                </p>
 
-                {/* Title */}
-                <p className="text-white text-[15px] mt-1 flex items-center gap-1 justify-center">
-                    Growth Marketing Strategist | B2B & SaaS Specialist
-                    <span className="text-white text-lg">✔</span>
-                </p>
+                {/* Title + Verified Check */}
+                <div className="flex items-center justify-center gap-2 mt-1.5">
+                    <p className="text-white text-[15px] font-medium">
+                        Growth Marketing Strategist | B2B & SaaS Specialist
+                    </p>
+                    {/* Checkmark Icon */}
+                    <BadgeCheck className="w-5 h-5 text-white fill-transparent" strokeWidth={2.5} />
+                </div>
 
-                {/* Buttons */}
-                <div className="mt-6 flex gap-4">
-                    <button
-                        className="px-6 py-2 rounded-xl border border-white text-white text-[14px] font-medium hover:bg-white hover:text-[#2D60FF] transition"
-                    >
-                        View Linked profile
-                    </button>
+                {/* Action Buttons */}
+                <div className="mt-8 flex flex-wrap justify-center gap-4 w-full">
+                    <button
+                        className="px-6 py-2.5 rounded-xl border border-white text-white text-[14px] font-semibold hover:bg-white hover:text-[#2D60FF] transition-all duration-200"
+                    >
+                        View Linked profile
+                    </button>
 
-                    <button
-                        className="px-6 py-2 rounded-xl border border-white text-white text-[14px] font-medium hover:bg-white hover:text-[#2D60FF] transition"
-                    >
-                        View Portfolio
-                    </button>
-                </div>
-            </div>
-             <h3 className="mt-10 text-[18px] font-semibold text-gray-900">
-              Mission statement
-            </h3>
+                    <button
+                        className="px-6 py-2.5 rounded-xl border border-white text-white text-[14px] font-semibold hover:bg-white hover:text-[#2D60FF] transition-all duration-200"
+                    >
+                        View Portfolio
+                    </button>
+                </div>
+            </div>
 
-            <p className="mt-3 text-[14px] text-gray-700 leading-[22px]">
-              My mission is to provide unparalleled expertise and guidance to clients in the
-              construction industry. We are committed to delivering innovative solutions that
-              optimize project efficiency, minimize costs, and ensure the highest standards of
-              quality and safety. Through strategic consulting, meticulous planning, and
-              proactive collaboration, we empower our clients to achieve their construction
-              goals with confidence and success. Our dedication to excellence and integrity
-              defines our approach, making us..
-            </p>
+            {/* --- OTHER DETAILS (Cleaned up & Fixed) --- */}
+            
+            {/* Mission Statement */}
+            <div className="mt-8">
+                <h3 className="text-[18px] font-bold text-[#101828] mb-3">
+                    Mission statement
+                </h3>
+                <p className="text-[14px] text-[#475467] leading-[24px]">
+                    My mission is to provide unparalleled expertise and guidance to clients in the
+                    construction industry. We are committed to delivering innovative solutions that
+                    optimize project efficiency, minimize costs, and ensure the highest standards of
+                    quality and safety. Through strategic consulting, meticulous planning, and
+                    proactive collaboration, we empower our clients to achieve their construction
+                    goals with confidence and success. Our dedication to excellence and integrity
+                    defines our approach, making us..
+                </p>
+            </div>
 
-            {/* ---------- BIO ---------- */}
-            <h3 className="mt-10 text-[18px] font-semibold text-gray-900">
-              Bio
-            </h3>
+            {/* Bio */}
+            <div className="mt-8">
+                <h3 className="text-[18px] font-bold text-[#101828] mb-3">
+                    Bio
+                </h3>
+                <p className="text-[14px] text-[#475467] leading-[24px]">
+                    Results-driven marketing expert with 10+ years of experience helping startups
+                    and enterprises boost brand visibility, optimize funnels, and scale customer
+                    acquisition. Specialized in digital, content, and performance marketing.
+                </p>
+            </div>
 
-            <p className="mt-3 text-[14px] text-gray-700 leading-[22px]">
-              Results-driven marketing expert with 10+ years of experience helping startups
-              and enterprises boost brand visibility, optimize funnels, and scale customer
-              acquisition. Specialized in digital, content, and performance marketing.
-              Results-driven marketing expert with 10+ years of experience helping startups
-              and enterprises boost brand visibility, optimize funnels, and scale customer
-              acquisition. Specialized in digital, content, and performance marketing.
-              Results-driven marketing expert with 10+ years of experience helping startups
-              and enterprises boost brand visibility, optimize funnels, and scale customer
-              acquisition. Specialized in digital, content, and performance marketing.
-              Results-driven marketing expert with 10+ years of experience helping startups
-              and enterprises boost brand visibility, optimize funnels, and scale customer
-              acquisition. Specialized in digital, content, and performance marketing.
-            </p>
-            
-            <h3 className="mt-10 text-[18px] font-semibold text-gray-900">
-              Avaibility
-            </h3>
-            <p>
-              Open For 1:1 consultation<br></br>
-              Avaibility for short-team projects & audits
-            </p>
-            <h3 className="mt-10 text-[18px] font-semibold text-gray-900">
-              Languages
-            </h3>
-            <p>English - Spanish (professional Working Profficiency)</p>
-            <h3 className="mt-10 text-[18px] font-semibold text-gray-900">
-              Core Expertise / Skills
-            </h3>
-            <div className="flex flex-wrap gap-3 mt-4">
+            {/* Availability */}
+            <div className="mt-8">
+                <h3 className="text-[18px] font-bold text-[#101828] mb-3">
+                    Availability
+                </h3>
+                <p className="text-[14px] text-[#475467] leading-[24px]">
+                    Open For 1:1 consultation<br />
+                    Availability for short-term projects & audits
+                </p>
+            </div>
 
-              <span className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-800 text-sm shadow-sm">
-                Growth Marketing Strategy
-              </span>
+            {/* Languages */}
+            <div className="mt-8">
+                <h3 className="text-[18px] font-bold text-[#101828] mb-3">
+                    Languages
+                </h3>
+                <p className="text-[14px] text-[#475467]">English - Spanish (Professional Working Proficiency)</p>
+            </div>
 
-              <span className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-800 text-sm shadow-sm">
-                Content Marketing
-              </span>
+            {/* Core Expertise / Skills */}
+            <div className="mt-8">
+                <h3 className="text-[18px] font-bold text-[#101828] mb-4">
+                    Core Expertise / Skills
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                    {[
+                        "Growth Marketing Strategy",
+                        "Content Marketing",
+                        "Paid Ads (Google, Meta, LinkedIn)",
+                        "SEO & Conversion Optimization",
+                        "GTM Strategy & Analytics",
+                        "CRM & Email Marketing (HubSpot, Mailchimp)"
+                    ].map((skill, index) => (
+                        <span key={index} className="px-4 py-2 bg-white border border-[#D0D5DD] rounded-full text-[#344054] text-[14px] font-medium shadow-sm">
+                            {skill}
+                        </span>
+                    ))}
+                </div>
+            </div>
 
-              <span className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-800 text-sm shadow-sm">
-                Paid Ads (Google, Meta, LinkedIn)
-              </span>
+            {/* --- CLIENT REVIEWS (Fixed Styles) --- */}
+            <div className="w-full mt-10  rounded-2xl pt-8 pr-8 pb-8 ">
 
-              <span className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-800 text-sm shadow-sm">
-                SEO & Conversion Optimization
-              </span>
+                <h2 className="text-[18px] font-bold text-[#101828] mb-6">
+                    Client Reviews / Endorsement
+                </h2>
 
-              <span className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-800 text-sm shadow-sm">
-                GTM Strategy & Analytics
-              </span>
+                <div className="flex flex-col md:flex-row gap-8 w-full">
 
-              <span className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-800 text-sm shadow-sm">
-                CRM & Email Marketing (HubSpot, Mailchimp)
-              </span>
+                    {/* LEFT SECTION – Ratings */}
+                    <div className="flex-1 space-y-3">
+                        <RatingRow label="Expert’s Helpfulness" stars={4} />
+                        <RatingRow label="Communication" stars={5} />
+                        <RatingRow label="Understanding of the problem" stars={3} />
+                        <RatingRow label="Quality of solution" stars={4} />
+                        <RatingRow label="Timeliness" stars={4} />
+                    </div>
 
-            </div>
-             <div className="w-full mt-10 bg-#CAD7FF rounded-2xl p-6" style={{ border: '1px solid #CAD7FF' }}>
+                    {/* MIDDLE DIVIDER */}
+                    <div className="hidden md:block w-[1px] bg-[#D1E9FF]"></div>
 
-              {/* Section Title */}
-              <h2 className="text-[20px] font-semibold text-gray-900 mb-6">
-                Client Reviews / Endorsement
-              </h2>
+                    {/* RIGHT SECTION – Satisfaction */}
+                    <div className="flex-1 space-y-3">
+                        <h3 className="text-[16px] font-bold text-[#101828] mb-4">Overall Satisfaction</h3>
+                        <SatRow label="Very Satisfied" pct="89%" />
+                        <SatRow label="Satisfied" pct="9%" />
+                        <SatRow label="Neutral" pct="2%" />
+                        <SatRow label="Very Dissatisfied" pct="0%" />
+                    </div>
 
-              {/* Rating Categories */}
-              <div className="flex w-full mt-6">
+                </div>
 
-                {/* LEFT SECTION – Ratings */}
-                <div className="w-[45%] space-y-3 text-[15px] text-gray-800">
+                <hr className="my-8 border-[#D1E9FF]" />
 
-                  {/* Expert's Helpfulness */}
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-[20px] font-semibold text-gray-900 mb-6">
-                      Expert’s Helpfulness</h2>
+                {/* Bottom Reviewer Card */}
+                <div className="flex items-start gap-4">
+                    <img
+                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt="User"
+                        className="w-[48px] h-[48px] rounded-full object-cover"
+                    />
 
-                  </div>
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-3 mb-1">
+                            <p className="text-[16px] font-bold text-[#101828]">Tabb Patz</p>
+                            <div className="flex gap-[1px]">
+                                {[...Array(4)].map((_, i) => <span key={i} className="text-[#FDB022] text-[16px]">★</span>)}
+                                <span className="text-gray-300 text-[16px]">★</span>
+                            </div>
+                        </div>
 
-                  {/* Communication */}
-                  <div className="flex items-center justify-between">
-                    <span>Communication</span>
-                    <span className="flex gap-1">
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-gray-300 text-lg">★</span>
-                    </span>
-                  </div>
+                        <p className="text-[12px] text-[#475467] font-medium">
+                            — Head of Marketing, Fintech Startup
+                        </p>
 
-                  {/* Understanding of the problem */}
-                  <div className="flex items-center justify-between">
-                    <span>Understanding of the problem</span>
-                    <span className="flex gap-1">
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-gray-300 text-lg">★</span>
-                      <span className="text-gray-300 text-lg">★</span>
-                    </span>
-                  </div>
+                        <p className="text-[14px] text-[#101828] leading-[22px] mt-2">
+                            Jane's insights were game-changing. We restructured our funnel and
+                            saw immediate results.
+                        </p>
+                    </div>
+                </div>
 
-                  {/* Quality of solution */}
-                  <div className="flex items-center justify-between">
-                    <span>Quality of solution</span>
-                    <span className="flex gap-1">
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-gray-300 text-lg">★</span>
-                    </span>
-                  </div>
+                <button className="mt-6 px-6 py-2 bg-white border border-[#2D60FF] text-[#2D60FF] rounded-lg text-[14px] font-semibold hover:bg-[#F5F8FF] transition-colors">
+                    View all
+                </button>
+            </div>
 
-                  {/* Timeliness */}
-                  <div className="flex items-center justify-between">
-                    <span>Timeliness</span>
-                    <span className="flex gap-1">
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-orange-500 text-lg">★</span>
-                      <span className="text-gray-300 text-lg">★</span>
-                      <span className="text-gray-300 text-lg">★</span>
-                    </span>
-                  </div>
+        </div>
+    );
+};
 
-                </div>
+// Helper Components for Cleaner Code
+const RatingRow = ({ label, stars }) => (
+    <div className="flex justify-between items-center text-[14px] text-[#344054]">
+        <span>{label}</span>
+        <div className="flex gap-1">
+            {[...Array(5)].map((_, i) => (
+                <span key={i} className={`text-[18px] leading-none ${i < stars ? "text-[#FDB022]" : "text-gray-300"}`}>★</span>
+            ))}
+        </div>
+    </div>
+);
 
-                {/* MIDDLE DIVIDER */}
-                <div className="w-[1px] bg-gray-300 mx-8"></div>
-
-                {/* RIGHT SECTION – Satisfaction */}
-                <div className="w-[45%] text-[15px] text-gray-800 space-y-3">
-                  <h2 className="text-[20px] font-semibold text-gray-900 mb-6">
-                    Overall Satisfaction</h2>
-                  <div className="flex justify-between">
-                    <span>Very Satisfied</span>
-                    <span className="font-medium text-gray-900">89%</span>
-                  </div>
-
-                  <div className="flex justify-between">
-                    <span>Satisfied</span>
-                    <span className="font-medium text-gray-900">9%</span>
-                  </div>
-
-                  <div className="flex justify-between">
-                    <span>Neutral</span>
-                    <span className="font-medium text-gray-900">2%</span>
-                  </div>
-
-                  <div className="flex justify-between">
-                    <span>Very Dissatisfied</span>
-                    <span className="font-medium text-gray-900">0%</span>
-                  </div>
-
-                </div>
-
-              </div>
-              <hr className="mt-8"></hr>
-              {/* Bottom Reviewer Card */}
-              <div className="flex items-start gap-4 mt-8 items-center">
-
-                {/* Avatar */}
-                <img
-                  src="/assets/user-avatar.png"
-                  alt="User"
-                  className="w-[55px] h-[55px] rounded-full"
-                />
-
-                <div className="flex flex-col">
-
-                  {/* Name + Rating */}
-                  <div className="flex items-center gap-3">
-                    <p className="text-[16px] font-semibold text-gray-900">Tabb Patz</p>
-
-                    {/* Stars */}
-                    <div className="flex gap-[2px]">
-                      <span className="text-orange-500 text-[18px] leading-none">★</span>
-                      <span className="text-orange-500 text-[18px] leading-none">★</span>
-                      <span className="text-orange-500 text-[18px] leading-none">★</span>
-                      <span className="text-orange-500 text-[18px] leading-none">★</span>
-                      <span className="text-gray-300 text-[18px] leading-none">★</span>
-                    </div>
-                  </div>
-
-                  {/* Role */}
-                  <p className="text-[14px] text-gray-600 mt-[2px]">
-                    — Head of Marketing, Fintech Startup
-                  </p>
-
-                  {/* Review text */}
-                  <p className="text-[15px] text-gray-800 leading-[22px] mt-2 max-w-[600px]">
-                    Jane's insights were game-changing. We restructured our funnel and
-                    saw immediate results.
-                  </p>
-
-                </div>
-              </div>
-              <button className="py-2 px-8 my-4" style={{ backgroundColor: '#F3F9FF', borderRadius: '5px', border: '1px solid #2D60FF', }}>view all</button>
-            </div>
-
-
-
-
-
-        </div>
-    )
-}
+const SatRow = ({ label, pct }) => (
+    <div className="flex justify-between items-center text-[14px] text-[#344054]">
+        <span>{label}</span>
+        <span className="font-semibold text-[#101828]">{pct}</span>
+    </div>
+);

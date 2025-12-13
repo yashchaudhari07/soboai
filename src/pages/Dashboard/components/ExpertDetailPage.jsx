@@ -1,239 +1,276 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
+import { Phone, MessageCircle, Mail, MessageSquare } from "lucide-react"; 
+
+/* --- ICONS IMPORTS --- */
+import IconTech from "../FindExpert/f1.svg";
+import IconMarketing from "../FindExpert/f2.svg";
+import IconStrategy from "../FindExpert/f3.svg";
+import IconLeadership from "../FindExpert/f4.svg";
+import IconFinance from "../FindExpert/f5.svg";
+import IconSales from "../FindExpert/f6.svg";
+import IconManagement from "../FindExpert/f7.svg";
+import IconOperations from "../FindExpert/f8.svg";
+import IconHR from "../FindExpert/f9.svg";
+
 import { ProposedExpert } from "./ProposedExpert";
+import DeleteModal from "./DeleteModal";
+import DeleteSuccessModal from "./DeleteSuccessModal";
+import AcceptSuccessModal from "./AcceptSuccessModal"; 
 
-export default function ExpertDetailPage({ data, onBack }) {
-  // Demo Data (Safe Fallback)
-  const safeData = data || {
-    area: "Marketing", // [cite: 99]
-    submitted: "14th Jun, 2025", // [cite: 101]
-    engagement: "Fractional", // [cite: 102]
-    status: "Requested", // [cite: 100]
-    statusText: "Your expert is making an engagement plan for your business. Review the plan details once they are shared.", // [cite: 89]
-    requirement: "Lorem ipsum dolor sit amet consectetur. Vel laoreet in amet pretium elementum convallis. Ut rhoncus malesuada fames eget ut in neque nam.", // [cite: 91]
-    files: 5 // [cite: 93]
-  };
+/* AREA ICON MAP */
+const AREA_ICONS = {
+    technology: IconTech,
+    marketing: IconMarketing,
+    strategy: IconStrategy,
+    leadership: IconLeadership,
+    finance: IconFinance,
+    sales: IconSales,
+    management: IconManagement,
+    operations: IconOperations,
+    hr: IconHR,
+};
 
-  const [value, setValue] = useState(false);
+export default function ExpertDetailPage({ data, onBack, onDelete }) {
+    
+    const navigate = useNavigate();
 
-  return (
-    <div className="p-8 bg-white min-h-screen font-['IBM_Plex_Sans_Hebrew']">
+    // --- STATE ---
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+    const [isAcceptOpen, setIsAcceptOpen] = useState(false);
 
-      {/* --- TOP HEADER --- */}
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-[24px] font-semibold text-[#1A1A1A]">
-          Expert request title 
-        </h1>
+    // --- LOGIC ---
+    const showExpert = true; 
 
-        <button
-          onClick={onBack}
-          className="px-6 py-2.5 bg-white text-[#2D60FF] rounded-xl font-medium border border-gray-200 hover:bg-gray-50 transition shadow-sm"
-        >
-          Back
-        </button>
-      </div>
+    const getStatusStyle = (status) => {
+        switch (status) {
+            case "Requested": return { bg: "#BEE8C0", text: "#007C0C" };
+            case "Rejected": return { bg: "#FF8181", text: "#720001" };
+            case "SOW under review": return { bg: "#FFDA84", text: "#9D6B01" };
+            case "Cancelled": return { bg: "#E7ECFF", text: "#2D60FF" };
+            case "Deleted": return { bg: "#EAE2E2", text: "#9CA3AF" };
+            default: return { bg: "#E7ECFF", text: "#2D60FF" };
+        }
+    };
 
-      {/* --- MAIN LAYOUT --- */}
-      <div className="grid lg:grid-cols-[380px_1fr] gap-8 items-start">
+    const formatDate = (val) => {
+        if (!val) return "";
+        return new Date(val).toLocaleDateString("en-GB", {
+            day: "numeric", month: "short", year: "numeric",
+        });
+    };
 
-        {/* ================= LEFT SIDE (REQUEST CARD) ================= */}
-        {/* [1.1, 1.2, 1.3, 1.4] Main Card Styling */}
-        <div 
-            className="border border-gray-100"
-            style={{
-                backgroundColor: "#FFFFFF",
-                borderRadius: "16px",
-                padding: "24px",
-                boxShadow: "0px 20px 50px 0px #2D60FF2E" // [1.4] Exact Shadow
-            }}
-        >
-            
-            {/* 1. HEADER SECTION */}
-            <div className="flex items-start" style={{ gap: "16px" }}> {/* [2.4] Gap 16px */}
-                
-                {/* [2.1, 2.2, 2.3] Icon Box */}
-                <div 
-                    className="flex items-center justify-center shrink-0"
-                    style={{
-                        width: "54px",
-                        height: "54px",
-                        backgroundColor: "#87C09C", // [2.2]
-                        borderRadius: "50px",       // [2.3] (User said 50)
-                    }}
-                >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 3V21H21" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M18 9L13.875 13.125L9.75 9L3 15.75" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </div>
+    const statusStyle = getStatusStyle(data.status);
+    const areaKey = data.area ? data.area.toLowerCase() : "technology";
+    const iconSrc = AREA_ICONS[areaKey] || IconTech;
+    const isDeleted = data.status === "Deleted";
 
-                {/* Text Details */}
-                <div className="flex-1">
-                    <div className="flex justify-between items-start">
-                        {/* [2.5] Title 24px Bold */}
-                        <h2 style={{ fontSize: "24px", fontWeight: "700", color: "#1A1A1A", lineHeight: "1.2" }}>
-                            {safeData.area} 
-                        </h2>
-                    </div>
-                     {/* [2.6] Badge */}
-                     <div className="mt-1">
-                        <span 
-                            style={{
-                                backgroundColor: "#BEE8C0", 
-                                color: "#007C0C",
-                                padding: "4px 16px", // [2.5] 16px horizontal padding
-                                borderRadius: "100px",
-                                fontSize: "12px",
-                                fontWeight: "600",
-                                display: "inline-block"
-                            }}
-                        >
-                            {safeData.status} 
-                        </span>
-                     </div>
-                </div>
-            </div>
+    // --- HANDLERS ---
+    const handleDeleteClick = () => setIsConfirmOpen(true);
+    
+    const handleConfirmYes = () => {
+        setIsConfirmOpen(false);
+        setIsSuccessOpen(true);
+    };
+    
+    const handleSuccessOk = () => {
+        setIsSuccessOpen(false);
+        if(onDelete) onDelete(data.id);
+    };
 
-            {/* 2. DATES & TYPE [3.1, 3.2, 3.3, 3.4] */}
-            {/* "thodi pudhi aahey" -> Indented to align with text, margin left approx 70px (54 icon + 16 gap) */}
-            <div className="mt-6 flex flex-col" style={{ marginLeft: "70px", gap: "16px" }}> {/* [3.3] Gap 16px */}
-                <p style={{ fontSize: "18px", color: "#2D2D2D" }}> {/* [3.1, 4.3] */}
-                    <span style={{ fontWeight: "400" }}>Submitted on - </span>
-                    <span style={{ fontWeight: "700" }}>{safeData.submitted}</span> {/* [3.2] Value Bold */}
-                </p>
-                <p style={{ fontSize: "18px", color: "#2D2D2D" }}>
-                    <span style={{ fontWeight: "400" }}>Engagement type - </span>
-                    <span style={{ fontWeight: "700" }}>{safeData.engagement}</span>
-                </p>
-            </div>
+    const handleAcceptClick = () => setIsAcceptOpen(true);
+    
+    const handleDashboardRedirect = () => {
+        setIsAcceptOpen(false);
+        navigate("/dashboard");
+    };
 
-            {/* DIVIDER [4.4] */}
-            <div className="w-full h-px my-6" style={{ backgroundColor: "#D5D8DC" }}></div>
+    return (
+        <div className="w-full h-screen bg-[#F9FAFB] md:p-8 font-plex-hebrew flex justify-center overflow-hidden">
 
-            {/* 3. STATUS SECTION */}
-            <div className="mb-6">
-                <h3 style={{ fontSize: "14px", fontWeight: "700", color: "#2D2D2D", marginBottom: "8px" }}> {/* [4.1, 4.3] */}
-                    Status
-                </h3>
-                <p style={{ fontSize: "14px", fontWeight: "400", color: "#2D2D2D", lineHeight: "1.6" }}> {/* [4.2] */}
-                   {safeData.statusText} 
-                </p>
-            </div>
+            <div className="w-full max-w-[1400px] bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 flex flex-col h-full">
 
-            {/* DIVIDER [4.4] */}
-            <div className="w-full h-px my-6" style={{ backgroundColor: "#D5D8DC" }}></div>
+                {/* HEADER */}
+                <div className="flex justify-between items-center mb-6 shrink-0">
+                    <h1 className="text-[24px] font-semibold text-[#1A1A1A]">Expert request title</h1>
+                    <button onClick={onBack} className="px-4 py-2 rounded-lg border border-[#D0D5DD] text-[14px] font-medium text-[#344054] hover:bg-gray-50 transition">
+                        Back
+                    </button>
+                </div>
 
-            {/* 4. REQUIREMENT SECTION */}
-            <div className="mb-6">
-                <h3 style={{ fontSize: "14px", fontWeight: "700", color: "#2D2D2D", marginBottom: "8px" }}>
-                    Business requirement 
-                </h3>
-                <p style={{ fontSize: "14px", fontWeight: "400", color: "#2D2D2D", lineHeight: "1.6" }}>
-                    {safeData.requirement}  
-                </p>
+                {/* DIVIDER */}
+                <div className="h-[1px] w-full bg-[#EAECF0] mb-6 shrink-0" />
 
-                {/* File Attachment [4.5] */}
-                <div className="flex items-center gap-2 mt-4 cursor-pointer hover:opacity-80 transition w-fit">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D60FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
-                    </svg>
-                    <span style={{ fontSize: "14px", fontWeight: "500", color: "#2D60FF", textDecoration: "underline" }}>
-                        {safeData.files} files attached 
-                    </span>
-                </div>
-            </div>
+                {/* MAIN GRID */}
+                <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 h-full overflow-hidden">
 
-            {/* DIVIDER [4.4] */}
-            <div className="w-full h-px my-6" style={{ backgroundColor: "#D5D8DC" }}></div>
+                    {/* ================= LEFT SIDE (DETAILS) ================= */}
+                    <div className="flex flex-col h-full overflow-y-auto custom-scrollbar pr-2">
+                        <div className="flex flex-col gap-6 mb-6">
+                            <div className="flex justify-between items-start">
+                                <div className="flex gap-4">
+                                    <div className="w-[52px] h-[52px] rounded-2xl flex items-center justify-center shrink-0" style={{ backgroundColor: statusStyle.bg }}>
+                                        <img src={iconSrc} alt={data.area} className={`w-6 h-6 object-contain ${isDeleted ? "grayscale opacity-50" : ""}`} />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h2 className="text-[18px] font-bold text-[#1A1A1A] leading-tight">{data.area}</h2>
+                                        <span className="text-[13px] font-bold mt-1" style={{ color: statusStyle.text }}>{data.status}</span>
+                                    </div>
+                                </div>
+                                <div className="text-right flex flex-col gap-1">
+                                    <p className="text-[13px] text-[#808080] font-medium">Submitted on - <span className="text-[#1A1A1A] font-semibold">{formatDate(data.submitted)}</span></p>
+                                    <p className="text-[13px] text-[#808080] font-medium">Engagement type - <span className="text-[#1A1A1A] font-semibold">{data.engagement}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="border-t border-b border-[#EAECF0] py-4 mb-6">
+                            <p className="text-[14px] leading-[22px] text-[#505050]">
+                                <span className="font-bold text-[#1A1A1A]">Status </span>
+                                {data.statusText || "Your expert is making an engagement plan for your business."}
+                            </p>
+                        </div>
 
-            {/* 5. ACTIONS (Buttons) */}
-            <div className="flex flex-col" style={{ gap: "16px" }}>
-                
-                {/* Edit Request Button [5.1, 5.2, 5.3, 5.6, 5.7] */}
-                <button 
-                    className="w-full flex items-center justify-center transition hover:opacity-90"
-                    style={{
-                        height: "48px",
-                        backgroundColor: "#F3F9FF",
-                        color: "#2D60FF",
-                        borderRadius: "12px",
-                        fontSize: "16px",
-                        fontWeight: "600",
-                        padding: "11px 27px",
-                        border: "none"
-                    }}
-                >
-                    Edit request 
-                </button>
+                        <div className="mb-6">
+                            <h3 className="text-[16px] font-bold text-[#1A1A1A] mb-2">Business requirement</h3>
+                            <p className="text-[14px] text-[#505050] leading-[24px]">{data.details || "Lorem ipsum dolor sit amet..."}</p>
+                        </div>
 
-                {/* Delete Request Button [5.1, 5.2, 5.4, 5.6, 5.7] */}
-                <button 
-                    className="w-full flex items-center justify-center transition hover:opacity-90"
-                    style={{
-                        height: "48px",
-                        backgroundColor: "#F3F9FF",
-                        color: "#2D60FF", // User specifically asked for #2D60FF here
-                        borderRadius: "12px",
-                        fontSize: "16px",
-                        fontWeight: "600",
-                        padding: "11px 27px",
-                        border: "none"
-                    }}
-                >
-                    Delete request 
-                </button>
-            </div>
+                        <div className="flex items-center gap-2 mb-8">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D60FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform -rotate-45">
+                                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                            </svg>
+                            <span className="text-[14px] font-medium text-[#2D60FF] cursor-pointer hover:underline">5 files attached</span>
+                        </div>
 
-        </div>
+                        <div className=" items-center gap-4 mt-auto pb-4" style={{ textAlign: 'center' }}>
+                            <button className="flex items-center justify-center w-full border border-[#2D60FF] p-3 bg-[#F3F9FF] rounded-xl text-[#2D60FF] gap-2 text-[14px] font-semibold hover:text-[#2D60FF] transition-colors">
+                                Edit request
+                            </button>
+                            <button 
+                                className="flex w-full items-center justify-center bg-[#F3F9FF] border border-[#2D60FF] rounded-xl text-[#2D60FF] p-3 gap-2 text-[14px] font-semibold mt-3 hover:text-[#B42318] transition-colors" 
+                                onClick={handleDeleteClick}
+                            >
+                                Delete request
+                            </button>
+                        </div>
+                    </div>
 
-        {/* ================= RIGHT SIDE ================= */}
-        <div className="flex flex-col gap-6">
+                    {/* ================= RIGHT SIDE (NEW LAYOUT) ================= */}
+                    <div className="flex flex-col h-full border border-[#D1E9FF] rounded-2xl overflow-hidden bg-white">
 
-          {/* RIGHT SIDE TOP BANNER */}
-          <div className="bg-[#EEF2FF] border border-[#E0E7FF] rounded-2xl p-8">
-              <h2 className="text-[20px] font-bold text-[#1A1A1A] mb-4">
-                Curious About Your Consultant's Advice? 
-              </h2>
+                        {/* --- 1. SCROLLABLE CONTENT (Top Box + Expert) --- */}
+                        <div className="flex-1 overflow-y-auto custom-scrollbar p-6">
+                            
+                            {/* TOP PROMO CARD (Horizontal Layout - Reduced Height) */}
+                            <div className="w-full bg-[#EFF8FF] rounded-xl p-5 mb-6 border border-blue-50">
+                                <div className="flex items-center justify-between gap-6">
+                                    
+                                    {/* Left: Text Content */}
+                                    <div className="flex-1">
+                                        <h3 className="text-[16px] font-bold text-[#101828] mb-2 leading-tight">
+                                            Curious About Your Consultant's Advice?
+                                        </h3>
+                                        <ul className="space-y-1.5 mb-4">
+                                            <li className="flex items-start gap-2 text-[13px] text-[#475467]">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-[#2D60FF] mt-1.5 shrink-0"></span>
+                                                Instantly access detailed responses.
+                                            </li>
+                                            <li className="flex items-start gap-2 text-[13px] text-[#475467]">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-[#2D60FF] mt-1.5 shrink-0"></span>
+                                                Connect directly with consultants.
+                                            </li>
+                                            <li className="flex items-start gap-2 text-[13px] text-[#475467]">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-[#2D60FF] mt-1.5 shrink-0"></span>
+                                                Streamline your decision-making.
+                                            </li>
+                                        </ul>
+                                        <div className="flex items-center gap-4">
+                                            <button className="bg-[#101828] text-white text-[12px] font-semibold px-4 py-2 rounded-lg hover:bg-black transition">
+                                                Upgrade to pro
+                                            </button>
+                                            <button className="text-[#2D60FF] text-[12px] font-semibold hover:underline">
+                                                Learn more {">"}
+                                            </button>
+                                        </div>
+                                    </div>
 
-              <ul className="space-y-3 mb-6">
-                {[
-                  "Instantly access detailed responses to your query.",
-                  "Connect directly with consultants to discuss your solutions.",
-                  "Streamline your decision-making with all information in one place."
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-[15px] text-gray-700 leading-[24px]">
-                    <span className="w-2 h-2 rounded-full bg-[#2D60FF] mt-2 shrink-0"></span>
-                    {item}  
-                  </li>
-                ))}
-              </ul>
+                                    {/* Right: Compact Icons Cluster */}
+                                    <div className="relative w-28 h-24 shrink-0">
+                                        <div className="absolute top-0 right-2 bg-white p-2 rounded-xl shadow-sm border border-gray-100 transform rotate-12 z-20">
+                                            <MessageCircle className="w-4 h-4 text-[#25D366] fill-current" />
+                                        </div>
+                                        <div className="absolute top-8 right-12 bg-white p-2 rounded-xl shadow-sm border border-gray-100 transform -rotate-12 z-10">
+                                            <Phone className="w-4 h-4 text-[#25D366] fill-current" />
+                                        </div>
+                                        <div className="absolute bottom-2 right-4 bg-white p-2 rounded-xl shadow-sm border border-gray-100 transform rotate-6 z-30">
+                                            <Mail className="w-4 h-4 text-[#EA4335]" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-              <div className="flex items-center gap-6">
-                <button className="bg-[#2D60FF] text-white px-6 py-2.5 rounded-lg text-[14px] font-medium shadow-md hover:bg-blue-700 transition">
-                  Upgrade to pro 
-                </button>
-                <button className="text-[#2D60FF] text-[14px] font-semibold hover:underline">
-                  Learn more &gt; 
-                </button>
-              </div>
-          </div>
+                            {/* BOTTOM: PROPOSED EXPERT (Scrolls with Top Box) */}
+                            {showExpert ? (
+                                <div className="w-full">
+                                    <ProposedExpert />
+                                </div>
+                            ) : (
+                                <div className="p-6 bg-[#F0F5FF] rounded-xl border border-[#DCE4FE] flex items-start gap-4">
+                                    <div className="mt-0.5 shrink-0">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="12" cy="12" r="10" stroke="#2D60FF" strokeWidth="2" />
+                                            <path d="M12 16V12" stroke="#2D60FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            <circle cx="12" cy="8" r="1" fill="#2D60FF" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p className="text-[15px] text-[#1D2939] font-medium leading-[24px]">
+                                            We're assigning the most suitable expert based on the details you provided.
+                                            <br />
+                                            <span className="text-[#2D60FF]">Thank you for your patience.</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
 
-          {/* CONDITIONAL RENDER */}
-          {value ? (
-            <ProposedExpert data={safeData} />
-          ) : (
-            <div className="bg-[#F8FAFC] border border-dashed border-gray-300 rounded-2xl h-[300px] flex flex-col items-center justify-center text-center p-8">
-                <div className="w-16 h-16 bg-gray-200 rounded-full mb-4 animate-pulse"></div>
-                <p className="text-[16px] text-gray-800 font-medium mb-1">
-                  We're assigning the most suitable expert based on the details you provided. 
-                </p>
-                <p className="text-[14px] text-gray-500">
-                  Thank you for your patience.
-                </p>
-            </div>
-          )}
-        </div>
+                        {/* --- 2. STATIC FOOTER (Buttons) --- */}
+                        {/* UPDATE: Buttons aligned to Right and Size Reduced */}
+                        {showExpert && (
+                            <div className="p-4 border-t border-gray-200 bg-white shrink-0 flex justify-end gap-3 z-10 shadow-[0_-4px_10px_-4px_rgba(0,0,0,0.05)]">
+                                <button className="w-24 py-1.5 border border-gray-300 text-gray-700 rounded-lg font-semibold text-[13px] hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                    Reject
+                                </button>
+                                <button 
+                                    onClick={handleAcceptClick}
+                                    className="w-24 py-1.5 bg-[#2D60FF] text-white rounded-lg font-semibold text-[13px] hover:bg-blue-700 shadow-sm transition-all"
+                                >
+                                    Accept
+                                </button>
+                            </div>
+                        )}
 
-      </div>
-    </div>
-  );
+                    </div>
+                </div>
+            </div>
+
+            {/* --- MODALS --- */}
+            <DeleteModal 
+                isOpen={isConfirmOpen} 
+                onClose={() => setIsConfirmOpen(false)} 
+                onConfirm={handleConfirmYes} 
+            />
+            <DeleteSuccessModal 
+                isOpen={isSuccessOpen} 
+                onOk={handleSuccessOk} 
+            />
+            <AcceptSuccessModal 
+                isOpen={isAcceptOpen}
+                onDashboard={handleDashboardRedirect}
+            />
+
+        </div>
+    );
 }

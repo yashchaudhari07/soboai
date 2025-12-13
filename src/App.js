@@ -13,6 +13,7 @@ import SignIn from "./pages/Dashboard/SignIn";
 import SignUp from "./pages/Dashboard/SignUp";
 import FrontPage from "./pages/Dashboard/FrontPage";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
+import { ProposedExpert } from "./pages/Dashboard/components/ProposedExpert";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -44,6 +45,7 @@ function App() {
             <Route path="/experts" element={<Experts />} />
             <Route path="/ai-insight" element={<AIInsights />} />
             <Route path="/engagement" element={<Engagement />} />
+            <Route path="/proposedexpert" element={<ProposedExpert />} />
         </Route>
 
         {/* Redirect unknown routes */}
