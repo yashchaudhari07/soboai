@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/soboai/static/css/main.e04e0e8d.css",
-    "main.js": "/soboai/static/js/main.a361d755.js",
+    "main.css": "/soboai/static/css/main.a3fffeeb.css",
+    "main.js": "/soboai/static/js/main.6ccfafcb.js",
     "static/js/453.d2878248.chunk.js": "/soboai/static/js/453.d2878248.chunk.js",
     "static/media/s4.svg": "/soboai/static/media/s4.75ae93a4c4341240d648c0dd17f60a3b.svg",
     "static/media/s3.svg": "/soboai/static/media/s3.cfbe09190813f3a45b9c52814f50e995.svg",
@@ -24,12 +24,12 @@
     "static/media/a1.svg": "/soboai/static/media/a1.38d8e71d9f69f67a0cc932e19f401ed6.svg",
     "index.html": "/soboai/index.html",
     "static/media/a6.svg": "/soboai/static/media/a6.6c982a247f44eb9c2b8b5c5aa675560d.svg",
-    "main.e04e0e8d.css.map": "/soboai/static/css/main.e04e0e8d.css.map",
-    "main.a361d755.js.map": "/soboai/static/js/main.a361d755.js.map",
+    "main.a3fffeeb.css.map": "/soboai/static/css/main.a3fffeeb.css.map",
+    "main.6ccfafcb.js.map": "/soboai/static/js/main.6ccfafcb.js.map",
     "453.d2878248.chunk.js.map": "/soboai/static/js/453.d2878248.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e04e0e8d.css",
-    "static/js/main.a361d755.js"
+    "static/css/main.a3fffeeb.css",
+    "static/js/main.6ccfafcb.js"
   ]
 }
